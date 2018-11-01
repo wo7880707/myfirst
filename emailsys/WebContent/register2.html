@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>睿盈Email管理系统</title>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="styles/common.css" />
+		<script src="js/jquery.js" type="text/javascript" charset="UTF-8"></script>
+	
+		
+		<style type="text/css">
+			.ts{
+				width: 300px;
+			}
+		</style>
+		
+	</head>
+
+	<body>
+		<div class="page-header">
+
+		</div>
+		<div class="page-body">
+			<div class="page-sidebar">
+
+			</div>
+			<div class="page-content">
+				<div class="content-nav">
+					 普通员工注册
+				</div>
+				<form>
+					<fieldset>
+						<legend>员工信息</legend>
+						<table class="formtable" style="width:80%">
+							<tr>
+								<td>姓名：</td>
+								<td>
+									<input type="text" id="employeename" maxlength="20" placeholder="请输入真实姓名"/>
+								</td>
+								<td class="ts"><span id="employeenamed"></span></td>
+							</tr>
+							<tr>
+								<td>账户名：</td>
+								<td>
+									<input type="text" id="accountname" maxlength="20" placeholder="请输入账户名" />
+								</td>
+								<td class="ts"><span id="accountnamed"></span></td>
+							</tr>
+							<tr>
+								<td>密码：</td>
+								<td>
+									<input type="password" id="password" maxlength="20" placeholder="请输入1位以上的密码" />
+								</td>
+								<td class="ts"><span id="passwordd"></span></td>
+							</tr>
+							<tr>
+								<td>确认密码：</td>
+								<td>
+									<input type="password" id="confirm" maxlength="20" placeholder="请输入相同的密码" />
+								</td>
+								<td class="ts"><span id="confirmd"></span></td>
+							</tr>
+							<tr>
+								<td>性别</td>
+								<td>
+									<input type="text" id="phone" maxlength="20" placeholder="请输入性别" />
+								</td>
+								<td class="ts"><span id="phoned"></span></td>
+							</tr>
+							
+							<tr>
+								<td colspan="6" class="command">
+									<input type="button" class="clickbutton" id = "register" value="注册" />
+									<input type="button" class="clickbutton" id = "reset" value="返回" onclick = "window.history.back();"/>
+								</td>
+							</tr>
+						</table>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+		<div class="page-footer">
+
+		</div>
+		<script type="text/javascript">
+
+	
+		
+		
+		</script>
+		<script type="text/javascript">
+			$(".page-header").load("headerlogin.html");
+			//$(".page-sidebar").load("sidebar.html");
+			$(".page-footer").load("footer.html");
+		</script>
+			<script src="js/reg.js" type="text/javascript"  charset="UTF-8"></script>
+	</body>
+	
+</html>

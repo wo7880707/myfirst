@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>睿盈Email管理系统</title>
+		<meta charset="UTF-8" http-equiv="X-UA-Compatible" content="IE=edge" >
+		<link rel="stylesheet" href="styles/common.css" />	
+		<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="js/main.js" charset="utf-8"></script>
+		<script type="text/javascript" src="js/alltrade.js" charset="utf-8"></script>
+		<style type="text/css">
+#divfrom {
+	float: left;
+	width: 150px;
+}
+#divto {
+	float: left;
+	width: 150px;
+}
+#divoperator {
+	float: left;
+	width: 50px;
+	padding: 60px 5px;
+}
+#divoperator input[type="button"] {
+	margin: 10px 0;
+}
+#selDepartments {
+	display: block;
+	width: 100%;
+}
+#selEmployees {
+	display: block;
+	width: 100%;
+	height: 225px;
+}
+#selSelectedEmployees {
+	display: block;
+	width: 100%;
+	height: 225px;
+}
+#numofattendents {
+	background-color: lavender;
+	text-align: center;
+}
+#meetingname {
+	text-align: center;
+}
+</style>
+	</head>
+	<body>
+		<div class="page-header">
+		</div>
+		<div class="page-body">
+			<div class="page-sidebar">
+			</div>
+			<div class="page-content">
+				<div class="content-nav">
+					交易管理> 交易信息 <a href = "trade/dividePager.action">测试一下分页</a>
+				</div>
+				<!-- 表格 -->
+				<table id="UQT_detailTable" class="listtable">
+				</table>
+				<!-- 分页 -->
+				<div id="div_pager" class="page_con" style="margin-top: 10px;">
+				</div>
+				 <form action="trade/showCL.action" method="post"> 
+					<fieldset style="margin-top: 10px;">
+						<legend>生成图表</legend>	
+					<span style="margin-left: 120px;">交易账户 :</span> <input type="text" name="jyzh" id = "jyzh" value="" placeholder="请输入..." />
+					<span style="margin-left: 50px;">合&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 约 :</span> <input type="text" id = "contract" name="contract"  value="" placeholder="请输入..." /> 
+					<br /><br />
+					<span id=""  style="margin-left: 120px;" >开始时间 :</span>
+					<input type="date" id="starttime"  name="starttime" value="2017-01-01" style="height: 20px; width: 150px;"/> 
+					<span id="" style="margin-left: 50px;">结束时间 :</span>
+					<input type="date" id="endtime"  name="endtime" value="2017-01-01" style="height: 20px; width: 150px; "/> 
+					<br /><br />
+					<span style="margin-left: 120px;">策&nbsp; 略&nbsp; 名 :</span> 
+					<br />
+					<div id="divfrom" style="margin-left: 188px;">
+								<!--<select id="selDepartments" onchange="showEmployees()">
+								</select>-->
+								 <select id="selEmployees" multiple="true">
+								</select>
+							</div>
+							<div id="divoperator">
+								<input type="button" class="clickbutton" value="&gt;" onclick="selectEmployees()" /> 
+								<input type="button" class="clickbutton"
+									value="&lt;" onclick="deSelectEmployees()" />
+							</div>
+							<div id="divto">
+								<select id="selSelectedEmployees" multiple="true" >
+								</select>
+							</div>
+					<input type="text" name="clm" id = "clm" style ="width:200px;  display:none;" value = "null"  />
+					<!--<a href = "trade/showchart.action">确认</a>-->
+					<!--<button id="b2" style="margin-left: 260px; width: 200px; margin-bottom: 10px; height: 40px;font-size:16px ;">确认查询</button>-->
+					 <input type="submit" value="确认查询" style="margin-left: 260px; margin-top: 20px; width: 200px; margin-bottom: 10px; height: 40px;font-size:16px ;"/> 
+					</fieldset>
+					
+				 </form> 
+					<fieldset style="margin-top: 10px;">
+						<legend>查询信息</legend>	
+					
+					<span style="margin-left: 45px;">日&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 期 :</span> <input type="text"  id="s1" value="" placeholder="请输入..." /> 
+					<span>白&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 昼 :</span> <input type="text"  id="s2" value="" placeholder="请输入..." /> 
+					<span>杠上开账户 :</span> <input type="text" name="s1" id="s3" value="" placeholder="请输入..." />
+					<br /><br />
+					<span style="margin-left: 45px;">交易账户 :</span> <input type="text"  id="s4"  value="" placeholder="请输入..." />
+					<span>策&nbsp; 略&nbsp; 名 :</span> <input type="text"  id="s5" value="" placeholder="请输入..." />
+					<span >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I&nbsp;D&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</span> <input type="text"  id="s6" value="" placeholder="请输入..." /> 
+					<br /><br />
+					<span style="margin-left: 45px;">合&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 约 :</span> <input type="text"  id="s7" value="" placeholder="请输入..." /> 
+					<span>期望收益 :</span> <input type="text"  id="s8" value="" placeholder="请输入..." />
+					<span >&nbsp;平仓盈亏&nbsp;&nbsp; :&nbsp;</span> <input type="text"  id="s9" value="" placeholder="请输入..." />
+					<br /><br />
+					<span style="margin-left: 45px;">持仓盈亏 :</span> <input type="text"  id="s10" value="" placeholder="请输入..." />
+					<span >浮动收益 :</span> <input type="text"  id="s11" value="" placeholder="请输入..." /> 
+					<span>&nbsp;最&nbsp; 新&nbsp; 价 &nbsp;&nbsp;:&nbsp;</span> <input type="text"  id="s12" value="" placeholder="请输入..." /> 
+					<br /><br />
+					<span style="margin-left: 45px;">多&nbsp; 持&nbsp;仓 :</span> <input type="text"  id="s13" value="" placeholder="请输入..." />
+					<span >空&nbsp; 持&nbsp; 仓 :</span> <input type="text"  id="s14" value="" placeholder="请输入..." />
+					<span>&nbsp;手&nbsp; 续&nbsp; 费 &nbsp;&nbsp;:</span> <input type="text"  id="s15" value="" placeholder="请输入..." />
+					<br /><br />
+					<button id="b" style="margin-left: 260px; width: 200px; margin-bottom: 10px; height: 40px;font-size:16px ;">确认查询</button>
+				</fieldset>
+				
+				
+				
+				<div id="export" style="margin-bottom: 10px; margin-top: 10px;">
+						
+						<fieldset>
+						<legend>导出文件</legend>	
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<span ><a data-type="json" href="javascript:;" style="text-decoration:none; ">导 出 json</a></span> 
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<span ><a data-type="txt" href="javascript:;"  style="text-decoration:none; ">导 出 txt</a></span> 
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<span ><a data-type="csv" href="javascript:;"  style="text-decoration:none; ">导 出 csv</a></span> 
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<span ><a data-type="xls" href="javascript:;" style="text-decoration:none; " >导 出 excel</a></span> 
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<span ><a data-type="doc" href="javascript:;" style="text-decoration:none; ">导 出 word</a></span>
+						</fieldset>
+						
+				</div>
+			</div>
+		</div>
+		<div class="page-footer">
+
+		</div>
+		<script type="text/javascript">
+			$(".page-header").load("header.html");
+			$(".page-sidebar").load("sidebar.html");
+			$(".page-footer").load("footer.html");
+		</script>
+		<script src="js/init.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+	<script type="text/javascript">
+		var arr = [];
+		//var result = [{"name":"jack"},{"name":"rose"}];
+		var result = [];
+		var clName = "";
+		var tempInt;
+
+			//读取全部
+		/* $.ajax({
+				type: "post",
+				url: "trade/showAll.action"
+			}).done(function(res) {
+				json = res;
+				$(function() {
+						initProgrom();
+					})*/
+					/* for (var i = 0; i < res.length; i++) {
+						$('#table1').append('<tr><td>'+ res[i].id+'</td><td>'+res[i].emailName+'</td><td>'+res[i].emailTime +'</td><td>'+res[i].emailTheme +'</td><td>'+res[i].emailContent +'</td><td>'+res[i].emailFile +'</td></tr>')	
+					} 
+			}) */
+			//读取策略
+		$.ajax({
+				type: "post",
+				url: "trade/showAllclName.action"
+			}).done(function(res) {
+				arr = res;
+				for(var i = 0 ; i < res.length; i ++){
+					//$('table').append('<tr><td>'+ (i +1)+'</td><td>'+arr[i].username+'</td><td>'+arr[i].password +'</td></tr>')
+				$("#selEmployees").append('<option value="' + res[i] + '">' + res[i]+ '</option>')
+				}
+			})
+			/*//图表查询
+			$("#b2").click(function() {
+				//取到下拉菜单里所显示值的value
+				$.ajax({
+					type: "post",
+					url: "trade/showCL.action",
+					data: {"jyzh":$("#jyzh").val(),
+						"contract":$("#contract").val(),
+						"starttime":$("#starttime").val(),
+						"endtime":$("#endtime").val(),
+						"clm":clName
+					}
+				}).done(function() {
+					
+				})
+			})*/
+			//模糊查询
+		$("#b").click(function() {
+				//取到下拉菜单里所显示值的value
+				$.ajax({
+					type: "post",
+					url: "trade/showAllByCondition.action",
+					data: {"time":$("#s1").val().trim(),
+						"dn":$("#s2").val().trim(),
+						"gskCount":$("#s3").val().trim(),
+						"tradeCount":$("#s4").val().trim(),
+						"clName":$("#s5").val().trim(),
+						"csID":$("#s6").val().trim(),
+						"contract":$("#s7").val().trim(),
+						"qwsy":$("#s8").val().trim(),
+						"pcyk":$("#s9").val().trim(),
+						"ccyk":$("#s10").val().trim(),
+						"fdsy":$("#s11").val().trim(),
+						"zxj":$("#s12").val().trim(),
+						"dcc":$("#s13").val().trim(),
+						"kcc":$("#s14").val().trim(),
+						"sxf":$("#s15").val().trim()
+					}
+				}).done(function(res) {
+					if (res.length == 0) {
+						alert("没有对应的信息")
+					} else {
+						$('#UQT_detailTable').empty();
+						json = res;
+						$(function() {
+								initProgrom();
+							})
+					}
+				})
+			})
+			//左右移动的
+			function employee(employeeid, employeename) {
+				this.employeeid = employeeid;
+				this.employeename = employeename;
+			}
+
+			function department(departmentid, departmentname, employees) {
+				this.departmentid = departmentid;
+				this.departmentname = departmentname;
+				this.employees = employees;
+			} 
+			//右移>
+			function selectEmployees() {
+				var selEmployees = document.getElementById('selEmployees');
+				for (var i = 0; i < selEmployees.options.length; i++) {
+					/*遍历所有的select，如果被选中就走if*/
+					if (selEmployees.options[i].selected) {
+						/*给临时变量赋值i*/
+						tempInt=i;
+						/*增加到右侧*/
+						addEmployee(selEmployees.options[i]);
+						/*变成不选中项*/
+						selEmployees.options[i].selected = false;
+					}
+				}	
+			}
+			//右移动的
+			function addEmployee(optEmployee) {
+				var selSelectedEmployees = document.getElementById('selSelectedEmployees');
+				var options = selSelectedEmployees.options;
+				var i = 0;
+				/*循环遍历一下右侧的原有值，和现在传过来的值比较，有一样的就跳出方法*/
+				while (i < options.length) {
+					//名字相等跳出循环，不添加
+					if (optEmployee.value == options[i].value) {
+						/*return跳出整个方法*/
+						return;
+					} 
+					i++;
+				}
+				/*没有一样的，创建一个option并且赋值*/
+				var opt = document.createElement("option");
+				opt.value = optEmployee.value;
+				opt.text = optEmployee.text;
+				selSelectedEmployees.appendChild(opt);
+				/*向数组里放数据*/
+				result.push(arr[tempInt]);
+				/*遍历数组result*/
+				clName = "";
+				for (var k = 0; k < result.length; k++) {
+						clName = clName + "-" + result[k];
+					}
+				$("#clm").val("");
+				$("#clm").val(clName);
+			}	
+			//左移动的
+			function deSelectEmployees() {
+				/*var elementsToRemoved = new Array();
+				var options = selSelectedEmployees.options;
+				for (var i = options.length-1; i >= 0; i--) {
+					if (options[i].selected) {
+						for(var j = result.length-1;j>=0;j--){
+							if(options[i].value == result[j]){
+								result.splice(j,1);
+								clName = "";
+						for (var k = 0; k < result.length; k++) {
+						clName = clName + "." + result[k];
+					}
+						$("#clm").val("");
+						$("#clm").val(clName);
+					selSelectedEmployees.removeChild(options[i]);
+					}
+				}
+						} 
+						} 
+					}*/
+				var selSelectedEmployees = document.getElementById('selSelectedEmployees');
+				var elementsToRemoved = new Array();
+				var options = selSelectedEmployees.options;
+				for (var i = 0; i < options.length; i++) {
+					if (options[i].selected) {
+						elementsToRemoved.push(options[i]);
+					}
+				}
+				for (i = 0; i < elementsToRemoved.length; i++) {
+					selSelectedEmployees.removeChild(elementsToRemoved[i]);
+					
+					for(var j =0;j<result.length;j++){
+						if(elementsToRemoved[i].value == (result[j] + "")){
+							result.splice(j,1);
+						}
+					}
+				}
+				clName = "";
+				for (var k = 0; k < result.length; k++) {
+					clName = clName + "-" + result[k];
+				}
+				$("#clm").val("");
+				$("#clm").val(clName);
+}			
+</script>
+	<!--导出到各种文件-->
+	<script src="js_out/Blob.js"></script>
+
+	<script src="js_out/FileSaver.js"></script>
+
+	<script src="js_out/tableExport.js"></script>
+
+	<script>
+		var exportLink = document.getElementById('export');
+		exportLink.addEventListener('click', function(e) {
+			e.preventDefault();
+			if (e.target.nodeName === "A") {
+				tableExport('UQT_detailTable', '测试测试', e.target.getAttribute('data-type'));
+			}
+		}, false);
+	</script>
+		
+</html>

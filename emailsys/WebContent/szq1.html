@@ -1,0 +1,82 @@
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" /> 
+<title>CSS下拉菜单实例模块-www.divcss5.com</title> 
+<style> 
+body,ul,li{background-color:white;font-size:12px;
+font-family:Arial, Helvetica, sans-serif;margin:0px; padding:0px;} 
+a{ color:#000000; text-decoration:none;} 
+body{text-align:center; } 
+li{display:inline;list-style:none;list-style-position:outside;
+text-align:center;font-weight:bold; float:left;} 
+.list a:link{color:#336601;text-decoration:none;float:left;
+width:100px;padding:3px 5px 0px 5px;} 
+.list a:visited{color:#336601;text-decoration:none;float:left;
+padding:3px 5px 0px 5px;width:100px;} 
+.list a:hover{color:white;float:left;padding:3px 3px 0px 20px;
+width:88px;text-decoration:none;background-color:#539D26;} 
+.list a:active{color:white;float:left;padding:3px 3px 0px 20px;
+width:88px;text-decoration:none; background-color:#BD06B4;} 
+#nav{width:600px;height:30px; margin:0 auto;padding:0px 5px;
+ text-align:center; clear:both;} 
+.list{line-height:20px;text-align:left;padding:4px;font-weight:normal;} 
+.menu1{width:120px;height:auto;margin:6px 4px 0px 0px;
+border:1px solid #9CDD75;background-color:#F1FBEC;color:#336601;
+padding:6px 0px 0px 0px;cursor:hand;
+overflow-y:hidden;filter:Alpha(opacity=70);-moz-opacity:0.7;} 
+.menu2{width:120px;height:18px;margin:6px 4px 0px 0px;
+background-color:#F5F5F5;color:#999999;border:1px solid #EEE8DD;
+padding:6px 0px 0px 0px;overflow-y:hidden;cursor:hand;} 
+</style> 
+</head> 
+ 
+<body> 
+<div>大家以后在以后运用时候可以扩展使用，更改为适合自己网页需求
+<a href="http://www.divcss5.com/">css</a>。</div> 
+<div id="nav"> 
+<ul> 
+<li class="menu2" onMouseOver="this.className='menu1'"
+ onMouseOut="this.className='menu2'">div+css  
+<div class="list"> 
+<a href="http://www.divcss5.com/">DIV CSS</a><br /> 
+<a href="#">我的首页</a><br /> 
+<a href="#">我的日志</a><br /> 
+<a href="#">我的日志</a><br /> 
+<a href="#">我的相册</a><br /> 
+<a href="#">我的收藏</a><br /> 
+</div> 
+</li> 
+<li class="menu2" onMouseOver="this.className='menu1'"
+ onMouseOut="this.className='menu2'"><a href="http://www.divcss5.com/html/">HTML入门</a> 
+<div class="list"> 
+<a href="http://www.divcss5.com/html/">HTML入门</a><br /> 
+<a href="http://www.divcss5.com/html/h5.html">html是什么</a><br /> 
+<a href="#">我的日志</a><br /> 
+<a href="#">我的相册</a><br /> 
+<a href="#">我的收藏</a><br /> 
+</div> 
+</li> 
+<li class="menu2" onMouseOver="this.className='menu1'"
+ onMouseOut="this.className='menu2'"><a href="http://www.divcss5.com/rumen/">CSS入门</a>  
+<div class="list"> 
+<a href="http://www.divcss5.com/">DIVCSS5</a><br /> 
+<a href="#">我的相册</a><br /> 
+<a href="#">我的收藏</a><br /> 
+</div> 
+</li> 
+<li class="menu2" onMouseOver="this.className='menu1'" 
+onMouseOut="this.className='menu2'">
+<a href="http://www.divcss5.com/css-hack/">CSS HACK</a> 
+<div class="list"> 
+<a href="http://www.divcss5.com/">DIV+CSS</a><br /> 
+<a href="#">我的首页</a><br /> 
+<a href="#">我的日志</a><br /> 
+<a href="#">我的相册</a><br /> 
+<a href="#">我的收藏</a><br /> 
+</div> 
+</li> 
+</ul> 
+</div> 
+</body> 
+</html>

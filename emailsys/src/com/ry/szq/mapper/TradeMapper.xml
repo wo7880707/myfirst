@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ry.szq.dao.TradeMapper">
+	<resultMap id="BaseResultMap" type="com.ry.szq.pojo.Trade">
+		<id column="id" property="id" jdbcType="INTEGER" />
+    	<result column="time" property="time" jdbcType="VARCHAR" />
+    	<result column="dn" property="dn" jdbcType="VARCHAR" />
+   		<result column="gskCount" property="gskCount" jdbcType="VARCHAR" />
+   		<result column="tradeCount" property="tradeCount" jdbcType="VARCHAR" />
+   		<result column="clName" property="clName" jdbcType="VARCHAR" />
+   		<result column="csID" property="csID" jdbcType="VARCHAR" />
+   		<result column="contract" property="contract" jdbcType="VARCHAR" />
+    	<result column="qwsy" property="qwsy" jdbcType="VARCHAR" />
+   		<result column="pcyk" property="pcyk" jdbcType="VARCHAR" />
+   		<result column="ccyk" property="ccyk" jdbcType="VARCHAR" />
+   		<result column="fdsy" property="fdsy" jdbcType="VARCHAR" />
+   		<result column="zxj" property="zxj" jdbcType="VARCHAR" />
+    	<result column="dcc" property="dcc" jdbcType="VARCHAR" />
+   		<result column="kcc" property="kcc" jdbcType="VARCHAR" />
+   		<result column="sxf" property="sxf" jdbcType="VARCHAR" />
+	</resultMap>
+    <!-- 增加 -->
+	<insert id="insert" parameterType="com.ry.szq.pojo.Trade" >
+    insert into trade
+    values(#{id},#{time},#{dn},#{gskCount},#{tradeCount},#{clName},#{csID},#{contract},#{qwsy},#{pcyk},#{ccyk},#{fdsy},#{zxj},#{dcc},#{kcc},#{sxf})
+	</insert>
+	<!-- 删除:根据ID -->
+	<delete id="delete">
+	delete from trade
+	where id = #{id}
+	</delete>
+	<!-- 修改 -->
+	<update id="update" parameterType="com.ry.szq.pojo.Trade">
+	 update trade
+	 set time = #{time},dn= #{dn},gskCount= #{gskCount},tradeCount= #{tradeCount},clName= #{clName},
+    	csID= #{csID},contract= #{contract},qwsy= #{qwsy},pcyk= #{pcyk},ccyk= #{ccyk},fdsy= #{fdsy}
+    	,zxj= #{zxj},dcc= #{dcc},kcc= #{kcc},sxf= #{sxf}
+	 where id = #{id}
+	</update>
+	<!-- 分页  总记录数-->
+	<select id="recordCount" resultType="Integer">
+	select count(*) from trade
+	</select>
+	<!-- 分页  bytime总记录数-->
+	<select id="recordCountByTime" resultType="Integer">
+	select count(*) from trade where time between #{startTime,jdbcType=VARCHAR} and #{endTime,jdbcType=VARCHAR}
+	</select>
+	
+	<!-- 查询 单个-->
+	<select id="selectByID" resultMap="BaseResultMap" >
+	select * from trade
+	where id = #{id}
+	</select>
+	<!-- 查找:根据  账号  合约    策略名 -->
+	<select id="selectCL" resultMap="BaseResultMap"  >
+	select * from trade
+	where  tradeCount = #{tradeCount,jdbcType=VARCHAR} and contract = #{contract,jdbcType=VARCHAR} and clName = #{clName,jdbcType=VARCHAR}  
+	</select>
+	
+	<!-- 查找:根据  账号  合约    策略名 日期 -->
+	<select id="selectCL2" resultMap="BaseResultMap"  >
+	select * from trade
+	where  tradeCount = #{tradeCount,jdbcType=VARCHAR} and contract = #{contract,jdbcType=VARCHAR} and clName = #{clName,jdbcType=VARCHAR} and time = #{time,jdbcType=VARCHAR} 
+	</select>
+	<!-- 查询 全部-->
+	<select id="selectAll" resultMap="BaseResultMap">
+	select * from trade
+	</select>
+	<!-- 查询 全部  ByTime-->
+	<select id="selectAllByTime" resultMap="BaseResultMap" >
+	select * from trade where time between #{startTime} and #{endTime} limit  #{start} ,#{pageSize}
+	</select>
+	<!-- 分页 查询 全部-->
+	<select id="selectAllByPaper" resultMap="BaseResultMap" parameterType="com.ry.szq.common.Pager">
+	select * from trade limit  #{start} ,#{pageSize}
+	</select>
+	<!-- 查询 去重以后的全部策略名字-->
+	<select id="selectAllclName" resultType="java.lang.String" >
+	select distinct clName
+	from trade
+	</select>
+	<!-- 查询 一段时间内的全部账号名字-->
+	<select id="showTradeCountByTime" resultType="java.lang.String" >
+	select distinct tradeCount
+	from trade where time between #{startTime} and #{endTime}
+	order by tradeCount
+	</select>
+	<!-- 查询 去重以后的全部策略名字-->
+	<select id="showClNameByTime" resultType="java.lang.String" >
+	select distinct clName
+	from trade where time between #{startTime} and #{endTime}
+	order by clName
+	</select>
+	<!-- 查询 去重以后的同策略名字下的所有合约-->
+	<select id="showContractByTime" resultType="java.lang.String" >
+	select distinct contract
+	from trade where time between #{startTime} and #{endTime} and clName = #{clName}
+	order by contract
+	</select>
+	<!-- 查询 去重以后的全部合约名字-->
+	<select id="showContractByTime_2" resultType="java.lang.String" >
+	select distinct contract
+	from trade where time between #{startTime} and #{endTime}
+	order by contract 
+	</select>
+	<!-- 查询 去重以后的相同合约名字下的所有合约-->
+	<select id="showClNameByTime_2" resultType="java.lang.String" >
+	select distinct clName
+	from trade where time between #{startTime} and #{endTime} and contract = #{contract}
+	order by clName 
+	</select>
+	<!-- 生成图表：1.同策略查询 -->
+	<select id="highcharts_byclName" resultMap="BaseResultMap" >
+	select * from trade 
+	where time between #{startTime} and #{endTime} and clName = #{clName} and contract = #{contract} and tradeCount IN
+	<foreach collection="tradeCount"  open="(" separator="," close=")" item="tradeCounts">
+	#{tradeCounts}
+	</foreach>
+	order by time
+	</select>
+	<!-- 2222 -->
+	<select id="highcharts_byclName_2" resultMap="BaseResultMap" >
+	select * from trade 
+	where time = #{time} and clName = #{clName} and contract = #{contract} and tradeCount IN
+	<foreach collection="tradeCount"  open="(" separator="," close=")" item="tradeCounts">
+	#{tradeCounts}
+	</foreach>
+	order by time
+	</select>
+	<!-- 生成图表：2.同合约查询 -->
+	<select id="highcharts_bycontract" resultMap="BaseResultMap" >
+	select * from trade 
+	where time between #{startTime} and #{endTime} and clName = #{clName} and contract = #{contract} and tradeCount IN
+	<foreach collection="tradeCount"  open="(" separator="," close=")" item="tradeCounts">
+	#{tradeCounts}
+	</foreach>
+	order by time
+	</select>
+	<!-- 2222 -->
+	<select id="highcharts_bycontract_2" resultMap="BaseResultMap" >
+	select * from trade 
+	where time = #{time} and clName = #{clName} and contract = #{contract} and tradeCount IN
+	<foreach collection="tradeCount"  open="(" separator="," close=")" item="tradeCounts">
+	#{tradeCounts}
+	</foreach>
+	order by time
+	</select>
+	<!-- 模糊查询-->
+	<select id="selectAllByCondition" resultMap="BaseResultMap"  >
+	select * from trade
+	where 1 = 1   
+	 <if test = "id != null and id != '' ">
+		and id like CONCAT(CONCAT('%',#{id}),'%')
+	</if>
+	<if test = "time != null and time != '' ">
+		and time like CONCAT(CONCAT('%',#{time}),'%')
+	</if>
+	<if test = "dn != null and dn != '' ">
+		and dn like CONCAT(CONCAT('%',#{dn}),'%')
+	</if>
+	<if test = "gskCount != null and gskCount != '' ">
+		and gskCount like CONCAT(CONCAT('%',#{gskCount}),'%')
+	</if>
+	<if test = "tradeCount != null and tradeCount != '' ">
+		and tradeCount like CONCAT(CONCAT('%',#{tradeCount}),'%')
+	</if>
+	<if test = "clName != null and clName != '' ">
+		and clName like CONCAT(CONCAT('%',#{clName}),'%')
+	</if> 
+	<if test = "csID != null and csID != '' ">
+		and csID like CONCAT(CONCAT('%',#{csID}),'%')
+	</if>
+	<if test = "contract != null and contract != '' ">
+		and contract like CONCAT(CONCAT('%',#{contract}),'%')
+	</if>
+	<if test = "qwsy != null and qwsy != '' ">
+		and qwsy like CONCAT(CONCAT('%',#{qwsy}),'%')
+	</if>
+	<if test = "pcyk != null and pcyk != '' ">
+		and pcyk like CONCAT(CONCAT('%',#{pcyk}),'%')
+	</if>
+	<if test = "ccyk != null and ccyk != '' ">
+		and ccyk like CONCAT(CONCAT('%',#{ccyk}),'%')
+	</if>
+	<if test = "fdsy != null and fdsy != '' ">
+		and fdsy like CONCAT(CONCAT('%',#{fdsy}),'%')
+	</if> 
+	<if test = "zxj != null and zxj != '' ">
+		and zxj like CONCAT(CONCAT('%',#{zxj}),'%')
+	</if>
+	<if test = "dcc != null and dcc != '' ">
+		and dcc like CONCAT(CONCAT('%',#{dcc}),'%')
+	</if>
+	<if test = "kcc != null and kcc != '' ">
+		and kcc like CONCAT(CONCAT('%',#{kcc}),'%')
+	</if>
+	<if test = "sxf != null and sxf != '' ">
+		and sxf like CONCAT(CONCAT('%',#{sxf}),'%')
+	</if> 
+	</select>
+</mapper>

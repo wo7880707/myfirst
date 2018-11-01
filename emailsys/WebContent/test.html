@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Insert title here</title>
+<script type="text/javascript" src="bootstrap/js/jquery.js"></script>
+ <!--<script type="text/javascript">
+	$(function(){
+	//显示所有课程 导航栏
+	$("#b").click(function(){
+			$.ajax({
+				type:"post",
+				url:"admin/insert.action",
+			}).done(function(res){
+				$("#t").text(res);
+				/*$("#addclasses").empty();
+				for(var i = 0 ; i < res.length; i ++){
+					//$('table').append('<tr><td>'+ (i +1)+'</td><td>'+arr[i].username+'</td><td>'+arr[i].password +'</td></tr>')
+					//console.log('<li><a href="team1.html" style="color: red; font-family: '+ "'微软雅黑'" + '; font-size: 18px;" >' + res[i].classType + '</a>' + '</li>' + '<li class="divider"></li>');
+					/*$("#addclasses").empty();*/
+					/* $("#addclasses").append('<li> <a href="team1.html?classId=' + res[i].classId  + '" style="color: red; font-family: '+ "'微软雅黑'" + '; font-size: 18px;" >' + res[i].classType + '</a>' + '</li>' + '<li class="divider"></li>') */
+				})
+				
+			})
+	})
+</script> -->
+</head>
+<body>
+	<select id="s1">
+		<option value="id">编号</option>
+		<option value="emailName">发件人</option>
+		<option value="emailTime">时间</option>
+		<option value="emailTheme">主题</option>
+		<option value="emailContent">正文内容</option>
+		<option value="emailFile">附件地址</option>
+	</select>
+	<button id = "b" >确认查询</button>
+<table border="1" cellspacing="0" cellpadding="0">
+	<tr><th>睿盈科技</th></tr>
+	<tr><td id = "t">Data</td></tr>
+</table>
+<button id="b">点击</button>
+</body>
+<script type="text/javascript">
+	$("#b").CLICK(function(){
+		alert($("#s1").values());
+	})
+	
+</script>
+</html>

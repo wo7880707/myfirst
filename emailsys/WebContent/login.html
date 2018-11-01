@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>睿盈Email管理系统</title>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="styles/common.css" />
+		<script src="js/jquery.js" type="text/javascript" charset="UTF-8"></script>
+	</head>
+
+	<body>
+		<div class="page-header">
+
+		</div>
+		<div class="page-body">
+			<!--<div class="page-sidebar">
+
+			</div>-->
+			<div class="page-content">
+				
+				<form>
+					<fieldset>
+						<legend>登录信息</legend>						
+						<table class="formtable" style="width:50%">
+							<tr>
+								<td>账号名:</td>
+								<td >
+									<input id="username" type="text" placeholder="请输入用户名" autofocus="autofocus"/>
+								</td>
+								<td width = "100px" align="left">
+									<span id="username2" style="display: none" ></span>
+								</td>
+								
+							</tr>
+							<tr>
+								<td>密码:</td>
+								<td>
+									<input id="password" type="password" placeholder="请输入密码"/>
+								</td>
+								<td>
+									
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" class="command">
+									<input type="button" value="登录" class="clickbutton" id="login"/>
+									<input type="button" value="注册" class="clickbutton" id = "register" onclick = "re()" />
+								</td>
+							</tr>
+						</table>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+		<div class="page-footer">
+			
+		</div>
+		<script src="js/jquery.js" type="text/javascript" ></script>
+		<script type="text/javascript">
+			$(".page-header").load("headerlogin.html");
+			//$(".page-sidebar").load("sidebar.html");
+			$(".page-footer").load("footer.html");
+		</script>
+	</body>
+	<script type="text/javascript">
+	function re(){
+		location.href = "register2.html"
+	}
+	document.onkeydown=function(event){
+		var e = event;
+	
+        if (e.keyCode == 13) {
+           $.ajax({
+				type:"post",
+				url:"admin/register.action",
+				data:{"userID":$("#username").val(),
+				 	 "userPass":$("#password").val()
+				}
+			}).done(function(res){
+				if(res == 0){
+					alert("登录失败：账号或密码错误");
+					
+				}else if(res == 1){
+					location.href = "trade.html";
+					
+				}else if(res == 2){
+					location.href = "trade.html";
+					
+				} else{
+					alert("账号未审批，请联系管理员");
+				}
+				
+			})        
+        }
+    }
+//异步
+$("#username").blur(function(){
+		$.ajax({
+			type:"post",
+			url:"admin/selectByID.action",
+			data:{"userID":$("#username").val()}
+		}).done(function(res){
+			if(res.userID != null){
+
+				$("#username2").show();				
+				$("#username2").text("！账号名存在").css("color","green");
+			}else{
+				$("#username2").show();
+				$("#username2").text("！账号名不存在").css("color","red");
+			}
+			
+		})
+})
+	//登录
+	$("#login").click(function(){
+			$.ajax({
+				type:"post",
+				url:"admin/register.action",
+				data:{"userID":$("#username").val(),
+				 	 "userPass":$("#password").val()
+				}
+			}).done(function(res){
+				if(res == 0){
+					alert("登录失败：账号或密码错误");
+					
+				}else if(res == 1){
+					location.href = "trade.html";
+					
+				}else if(res == 2){
+					location.href = "trade.html";
+					
+				} else{
+					alert("账号未审批，请联系管理员");
+				}
+				
+			})
+	})
+</script>
+</html>

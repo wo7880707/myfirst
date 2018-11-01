@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>睿盈Email管理系统</title>
+		<meta charset="UTF-8" http-equiv="X-UA-Compatible" content="IE=edge" >
+		<link rel="stylesheet" href="../styles/common.css" />	
+		<script src="../js/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="../js/main.js" charset="utf-8"></script>
+		<script type="text/javascript" src="../js/alltrade.js" charset="utf-8"></script>
+		<style type="text/css">
+#divfrom {
+	float: left;
+	width: 150px;
+}
+#divto {
+	float: left;
+	width: 150px;
+}
+#divoperator {
+	float: left;
+	width: 50px;
+	padding: 60px 5px;
+}
+#divoperator input[type="button"] {
+	margin: 10px 0;
+}
+#selDepartments {
+	display: block;
+	width: 100%;
+}
+#selEmployees {
+	display: block;
+	width: 100%;
+	height: 225px;
+}
+#selSelectedEmployees {
+	display: block;
+	width: 100%;
+	height: 225px;
+}
+#numofattendents {
+	background-color: lavender;
+	text-align: center;
+}
+#meetingname {
+	text-align: center;
+}
+</style>
+	</head>
+	<body>
+		<div class="page-header">
+		</div>
+		<div class="page-body">
+			<div class="page-sidebar">
+			</div>
+			<div class="page-content">
+				<div class="content-nav">
+					
+				</div>
+				<select  id = "se1234" >
+				<option value="0" >所有信息</option>
+				<option value="1" >精准查询</option>
+				<option value="2">日期查询</option>
+				<option value="3" selected = "selected">同品种查询</option>
+				<option value="4" >同策略查询</option>
+				<option value="5" >统计查询</option>
+				</select>
+				 <form action="trade/showCL.action" method="post"> 
+					<fieldset style="margin-top: 10px;">
+						<legend>同品种查询</legend>	
+					<span style="margin-left: 50px;">合&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 约 :</span> <input type="text" id = "contract" name="contract"  value="" placeholder="请输入..." /> 
+					<br /><br />
+					<span id=""  style="margin-left: 120px;" >开始时间 :</span>
+					<input type="date" id="starttime"  name="starttime" value="2017-01-01" style="height: 20px; width: 150px;"/> 
+					<span id="" style="margin-left: 50px;">结束时间 :</span>
+					<input type="date" id="endtime"  name="endtime" value="2017-01-01" style="height: 20px; width: 150px; "/> 
+					<br /><br />
+					<span style="margin-left: 120px;">策&nbsp; 略&nbsp; 名 :</span> 
+					<br />
+					<div id="divfrom" style="margin-left: 188px;">
+								<!--<select id="selDepartments" onchange="showEmployees()">
+								</select>-->
+								 <select id="selEmployees" multiple="true">
+								</select>
+							</div>
+							<div id="divoperator">
+								<input type="button" class="clickbutton" value="&gt;" onclick="selectEmployees()" /> 
+								<input type="button" class="clickbutton"
+									value="&lt;" onclick="deSelectEmployees()" />
+							</div>
+							<div id="divto">
+								<select id="selSelectedEmployees" multiple="true" >
+								</select>
+							</div>
+					<input type="text" name="clm" id = "clm" style ="width:200px;  display:none;" value = "null"  />
+					<!--<a href = "trade/showchart.action">确认</a>-->
+					<!--<button id="b2" style="margin-left: 260px; width: 200px; margin-bottom: 10px; height: 40px;font-size:16px ;">确认查询</button>-->
+					 <input type="submit" value="确认查询" style="margin-left: 260px; margin-top: 20px; width: 200px; margin-bottom: 10px; height: 40px;font-size:16px ;"/> 
+					</fieldset>
+				 </form> 
+			</div>
+		</div>
+		<div class="page-footer">
+
+		</div>
+		<script type="text/javascript">
+			$(".page-header").load("header.html");
+			$(".page-sidebar").load("sidebar.html");
+			$(".page-footer").load("footer.html");
+		</script>
+		<script src="init.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+	<script type="text/javascript">
+		var arr = [];
+		//var result = [{"name":"jack"},{"name":"rose"}];
+		var result = [];
+		var clName = "";
+		var tempInt;
+		//给se1234一个onchange事件
+		$("#se1234").change(function() {
+			var tem = $("#se1234").val();
+			if(parseInt(tem) == 0){
+				location.href = "trade.jsp";
+			}else if(parseInt(tem) == 1){
+				location.href = "mohuchaxun.html";
+			}else if (parseInt(tem) == 2){
+				location.href = "riqichaxun.html";
+			}else if (parseInt(tem) == 3){
+				location.href = "tongpinzhong.html";
+			}else if (parseInt(tem) == 4){
+				location.href = "tongceluo.html";
+			}else if (parseInt(tem) == 5){
+				location.href = "tongji.html";
+			}
+			})
+			//读取策略
+		$.ajax({
+				type: "post",
+				url: "trade/showAllclName.action"
+			}).done(function(res) {
+				arr = res;
+				for(var i = 0 ; i < res.length; i ++){
+					//$('table').append('<tr><td>'+ (i +1)+'</td><td>'+arr[i].username+'</td><td>'+arr[i].password +'</td></tr>')
+				$("#selEmployees").append('<option value="' + res[i] + '">' + res[i]+ '</option>')
+				}
+			})
+			
+			
+			//左右移动的
+			function employee(employeeid, employeename) {
+				this.employeeid = employeeid;
+				this.employeename = employeename;
+			}
+
+			function department(departmentid, departmentname, employees) {
+				this.departmentid = departmentid;
+				this.departmentname = departmentname;
+				this.employees = employees;
+			} 
+			//右移>
+			function selectEmployees() {
+				var selEmployees = document.getElementById('selEmployees');
+				for (var i = 0; i < selEmployees.options.length; i++) {
+					/*遍历所有的select，如果被选中就走if*/
+					if (selEmployees.options[i].selected) {
+						/*给临时变量赋值i*/
+						tempInt=i;
+						/*增加到右侧*/
+						addEmployee(selEmployees.options[i]);
+						/*变成不选中项*/
+						selEmployees.options[i].selected = false;
+					}
+				}	
+			}
+			//右移动的
+			function addEmployee(optEmployee) {
+				var selSelectedEmployees = document.getElementById('selSelectedEmployees');
+				var options = selSelectedEmployees.options;
+				var i = 0;
+				/*循环遍历一下右侧的原有值，和现在传过来的值比较，有一样的就跳出方法*/
+				while (i < options.length) {
+					//名字相等跳出循环，不添加
+					if (optEmployee.value == options[i].value) {
+						/*return跳出整个方法*/
+						return;
+					} 
+					i++;
+				}
+				/*没有一样的，创建一个option并且赋值*/
+				var opt = document.createElement("option");
+				opt.value = optEmployee.value;
+				opt.text = optEmployee.text;
+				selSelectedEmployees.appendChild(opt);
+				/*向数组里放数据*/
+				result.push(arr[tempInt]);
+				/*遍历数组result*/
+				clName = "";
+				for (var k = 0; k < result.length; k++) {
+						clName = clName + "-" + result[k];
+					}
+				$("#clm").val("");
+				$("#clm").val(clName);
+			}	
+			//左移动的
+			function deSelectEmployees() {
+				/*var elementsToRemoved = new Array();
+				var options = selSelectedEmployees.options;
+				for (var i = options.length-1; i >= 0; i--) {
+					if (options[i].selected) {
+						for(var j = result.length-1;j>=0;j--){
+							if(options[i].value == result[j]){
+								result.splice(j,1);
+								clName = "";
+						for (var k = 0; k < result.length; k++) {
+						clName = clName + "." + result[k];
+					}
+						$("#clm").val("");
+						$("#clm").val(clName);
+					selSelectedEmployees.removeChild(options[i]);
+					}
+				}
+						} 
+						} 
+					}*/
+				var selSelectedEmployees = document.getElementById('selSelectedEmployees');
+				var elementsToRemoved = new Array();
+				var options = selSelectedEmployees.options;
+				for (var i = 0; i < options.length; i++) {
+					if (options[i].selected) {
+						elementsToRemoved.push(options[i]);
+					}
+				}
+				for (i = 0; i < elementsToRemoved.length; i++) {
+					selSelectedEmployees.removeChild(elementsToRemoved[i]);
+					
+					for(var j =0;j<result.length;j++){
+						if(elementsToRemoved[i].value == (result[j] + "")){
+							result.splice(j,1);
+						}
+					}
+				}
+				clName = "";
+				for (var k = 0; k < result.length; k++) {
+					clName = clName + "-" + result[k];
+				}
+				$("#clm").val("");
+				$("#clm").val(clName);
+}			
+</script>
+	
+
+		
+</html>

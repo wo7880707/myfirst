@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context" xmlns:c="http://www.springframework.org/schema/c"
+    xmlns:cache="http://www.springframework.org/schema/cache" xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd
+		http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache-4.0.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+	<!-- 方式1.通过context:property-placeholder加载配置文件jdbc.properties中的内容 -->
+	 <!-- <context:property-placeholder location="classpath:api.properties" />  -->
+      <!-- <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">    
+        <property name="locations">    
+            <list>    
+                <value>classpath:api.properties</value>    
+            </list>    
+        </property>
+    </bean>  --> 
+
+	<!-- 方式5.自定义工具类PropertyUtil，并在该类的static静态代码块中读取properties文件内容保存在static属性中以供别的程序使用 -->
+	<!-- 配置数据源 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"  >
+		<property name="jdbcUrl" value="jdbc:mysql://localhost/ruiying" />
+		<property name="driverClass" value="com.mysql.jdbc.Driver" />
+		<property name="user" value="root" />
+		<property name="password" value="admin" />
+		<property name="initialPoolSize" value="3" />
+		<property name="maxPoolSize" value="10" />
+		<property name="minPoolSize" value="1" />
+		<property name="acquireIncrement" value="3" />
+		<property name="maxIdleTime" value="60" />
+	</bean>	
+	<!-- 配置MyBatis的连接工厂  同时指定数据源 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:mybatis.xml" />
+	</bean>
+	
+	<!-- Spring扫描映射的接口文件 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+	<!-- 扫描产生mapper接口文件 --><!-- 此处扫描的是Mapper接口 -->
+		<property name="basePackage" value="com.ry.szq.dao"></property>
+		<!-- <property name="sqlSessionFactory" ref="sqlSessionFactory"></property> --> 
+		<!-- 此时，启动会报异常，${jdbc.driver}这样的表达式获取不到properties里面的值，因为MapperScannerConigurer实际是在解析加载bean定义阶段的，
+		这个时候要是设置sqlSessionFactory的话，会导致提前初始化一些类，这个时候，PropertyPlaceholderConfigurer还没来得及替换定义中的变量，导致
+		把表达式当作字符串复制了，解决的办法如下： -->
+		<!-- 方法一：
+		修改<property name="sqlSessionFactory" ref="sqlSessionFactory"/>为<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+		原理：使用sqlSessionFactoryBeanName注入，不会立即初始化sqlSessionFactory, 所以不会引发提前初始化问题。 -->		 
+		<!-- 方法二：
+		直接删掉<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+		注意：在没有配置这一行时，必须配置一个以sqlSessionFactory命名的org.mybatis.spring.SqlSessionFactoryBean。 -->
+	</bean>
+	<!-- Spring扫描包 -->
+	<context:annotation-config />
+	<context:component-scan base-package="com.ry.szq.service,com.ry.szq.controller,com.ry.szq.common" ></context:component-scan>
+
+	<!-- 声明式事务 -->
+	
+	<!-- 配置Spring 事务管理器 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	<!-- 配置Spring事务通知属性 -->
+	
+	<tx:advice id="txa" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="insert*" isolation="DEFAULT" propagation="REQUIRED" read-only="false"/>
+			<tx:method name="update*" isolation="DEFAULT" propagation="REQUIRED" read-only="false"/>
+			<tx:method name="delete*" isolation="DEFAULT" propagation="REQUIRED" read-only="false"/>
+			<tx:method name="select*" read-only="true"/>
+		</tx:attributes>
+	</tx:advice>
+	
+	<!-- 配置AOP -->
+	
+	<aop:config>
+		<aop:pointcut expression="execution(* com.ry.szq.service.*.*(..))" id="txCut"/>
+		<aop:advisor advice-ref="txa" pointcut-ref="txCut"/>
+	</aop:config>
+	
+	<!-- 配置视图解析器 -->
+		<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<!--  跳转路径 字符串前面加上路径 -->
+		
+		<!-- view里面的字符串加上后缀 -->
+		<property name="suffix" value=".jsp"></property>		
+	</bean>
+	<!-- 配置上传组件 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="102400" />
+	</bean>
+	<!-- 配置异常处理器 -->
+	<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver"> 
+		<!-- <property name="defaultErrorView" value="error"></property>	 -->
+		<property name="exceptionMappings"> 						
+			<props> 					
+				<prop key="java.lang.Exception">error</prop> 				
+				<prop key="org.springframework.web.multipart.MaxUploadSizeExceededException">error2</prop>	
+			</props>					
+		</property>					
+	</bean> 
+	<!-- 配置拦截器： 所有路径拦截 -->
+	<!-- <mvc:interceptors>
+		<bean id="myInterceptor" class="com.icss.hr.interceptor.MyInterceptor"></bean>
+	</mvc:interceptors> -->
+	
+	<!-- 配置有映射路径的拦截器 -->
+	<!-- <mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/dept/*"/>
+			 <bean class="com.icss.hr.interceptor.MyInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors> -->
+	
+	<!-- 配置国际化 -->
+<!-- 	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+    国际化信息所在的文件名                     
+    <property name="basename" value="messages" />   
+    如果在国际化资源文件中找不到对应代码的信息，就用这个代码作为名称                
+    <property name="useCodeAsDefaultMessage" value="true" />           
+	</bean> -->
+	
+	<!-- 配置解析JSON类型 -->
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">			
+	<property name="messageConverters">			
+			<list>	
+				<bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"/>
+			</list>	
+	</property>			
+	</bean>		 
+</beans>

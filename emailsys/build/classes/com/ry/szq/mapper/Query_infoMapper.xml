@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ry.szq.dao.Query_infoMapper">
+	<resultMap id="BaseResultMap" type="com.ry.szq.pojo.Query_info">
+		<id column="id" property="id" jdbcType="INTEGER" /> 	
+    	<result column="userID" property="userID" jdbcType="VARCHAR" /> 
+    	<result column="time" property="time" jdbcType="DATE" />
+    	<result column="startTime" property="startTime" jdbcType="VARCHAR" />  
+    	<result column="endTime" property="endTime" jdbcType="VARCHAR" />  
+    	<result column="tradeCounts" property="tradeCounts" jdbcType="VARCHAR" />  
+    	<result column="clNames" property="clNames" jdbcType="VARCHAR" />  
+    	<result column="contracts" property="contracts" jdbcType="VARCHAR" /> 
+    	<result column="type" property="type" jdbcType="INTEGER" />    	
+	</resultMap>
+	<!-- 增加 -->
+	<insert id="insert" parameterType="com.ry.szq.pojo.Query_info" >
+    insert into query_info
+    values(#{id},#{userID},#{time},#{startTime},#{endTime},#{tradeCounts},#{clNames},#{contracts},#{type})
+	</insert>
+	<!-- 查询 单个-->
+	<select id="queryByInfo" resultMap="BaseResultMap" >
+	select * from query_info
+	where userID = #{userID} 
+	order by time desc, id desc
+	limit 1
+	</select>
+	
+
+</mapper>

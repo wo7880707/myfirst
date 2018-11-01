@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>睿盈Email管理系统</title>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="styles/common.css" />
+		
+		<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script type="text/javascript" src="js/main.js" charset="utf-8"></script>
+
+		<script type="text/javascript" src="js/addadmin.js" charset="utf-8"></script>
+
+	</head>
+
+	<body>
+		<div class="page-header">
+		</div>
+		<div class="page-body">
+			<div class="page-sidebar">
+			</div>
+			<div class="page-content">
+				<div class="content-nav">
+					账号管理> 注册审批</a>
+				</div>
+				<!-- 表格 -->
+				<table id="UQT_detailTable" class="listtable">
+				</table>
+				<!-- 分页 -->
+				<div id="div_pager" class="page_con">
+				</div>
+				
+			</div>
+		</div>
+		<div class="page-footer">
+		</div>
+		<script type="text/javascript">
+			$(".page-header").load("header.html");
+			$(".page-sidebar").load("sidebar.html");
+			$(".page-footer").load("footer.html");
+		</script>
+		<script src="js/init.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+	<script type="text/javascript">
+
+		//读取admin是3的人
+		$.ajax({
+				type: "post",
+				url: "admin/selectAllBy3.action"
+			}).done(function(res) {
+				json = res;
+				$(function() {
+						initProgrom();
+					})
+					/* for (var i = 0; i < res.length; i++) {
+						$('#table1').append('<tr><td>'+ res[i].id+'</td><td>'+res[i].emailName+'</td><td>'+res[i].emailTime +'</td><td>'+res[i].emailTheme +'</td><td>'+res[i].emailContent +'</td><td>'+res[i].emailFile +'</td></tr>')	
+					} */
+					/* private int id;
+					private String emailName;
+					private String emailTime;
+					private String emailTheme;
+					private String emailContent;
+					private String emailFile; */
+			})
+
+		
+	</script>
+		
+</html>

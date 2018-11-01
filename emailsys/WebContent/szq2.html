@@ -1,0 +1,33 @@
+<html>
+<head>
+<script language="javascript">
+var clickedA=false;
+var clickedB=false;
+function onclick_A()
+{
+	clickedA=true;
+	window.open("http://baidu.com","newwindow","");
+}
+
+function onclick_B()
+{
+	if (!clickedA)
+		alert("您要先点击A链接");
+	else
+	{
+		if (!clickedB)
+		{
+			alert("感谢您的点击");
+			clickedB=true;
+		}
+		else
+			window.open("http://baidu.com","newwindow","");
+	}
+}
+</script>
+</head>
+<body>
+<a href="#" onclick="onclick_A();">A</a><br>
+<a href="#" onclick="onclick_B();">B</a>
+</body>
+</html>

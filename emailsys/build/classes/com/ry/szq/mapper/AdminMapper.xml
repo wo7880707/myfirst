@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ry.szq.dao.AdminMapper">
+	<resultMap id="BaseResultMap" type="com.ry.szq.pojo.Admin">
+		<id column="userID" property="userID" jdbcType="VARCHAR" />
+    	<result column="userPass" property="userPass" jdbcType="VARCHAR" />
+    	<result column="userGender" property="userGender" jdbcType="VARCHAR" />
+   		<result column="userName" property="userName" jdbcType="VARCHAR" />
+   		<result column="userRemark" property="userRemark" jdbcType="VARCHAR" />
+	</resultMap>
+	<!-- 登录 -->
+	<select id="register" resultMap="BaseResultMap">
+	select * from emailsys_admin
+	where userID = #{userID} and userPass = #{userPass}
+	</select>
+	<!-- 增加 -->
+	<insert id="insert" parameterType="com.ry.szq.pojo.Admin" >
+    insert into emailsys_admin
+    values(#{userID},#{userPass},#{userGender},#{userName},#{userRemark})
+	</insert>
+	<!-- 删除 -->
+	<delete id="delete">
+	delete from emailsys_admin
+	where userID = #{userID}
+	</delete>
+	<!-- 修改 -->
+	<update id="update" parameterType="com.ry.szq.pojo.Admin">
+	 update emailsys_admin
+	 set userPass = #{userPass},userGender = #{userGender},userName = #{userName},userRemark = #{userRemark}
+	 where userID = #{userID}
+	</update>
+	<!-- 查询 单个-->
+	<select id="selectByID" resultMap="BaseResultMap" >
+	select * from emailsys_admin
+	where userID = #{userID}
+	</select>
+	<!-- 查询 单个：通过userRemark查询-->
+	<select id="selectByUserRemark" resultMap="BaseResultMap" >
+	select * from emailsys_admin
+	where userRemark = #{userRemark}
+	</select>
+	<!-- 查询 全部-->
+	<select id="selectAll" resultMap="BaseResultMap">
+	select * from emailsys_admin
+	</select>
+	<!-- 查询 全部 :状态是3的-->
+	<select id="selectAllBy3" resultMap="BaseResultMap">
+	select * from emailsys_admin
+	where userRemark = 3
+	</select>
+	<!-- 查询 全部 :状态是2的-->
+	<select id="selectAllBy2" resultMap="BaseResultMap">
+	select * from emailsys_admin
+	where userRemark = 2
+	</select>
+</mapper>

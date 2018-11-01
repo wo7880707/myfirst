@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Insert title here</title>
+		<link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="bg/css">
+		<script type="text/javascript" src="bootstrap/js/jquery.js"></script>
+		<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+		<style type="text/css">
+	
+<style type="text/css">
+	html, body {
+        position: relative;
+        height: 100%;
+      
+    }
+    body {
+    	
+        background-image: url(src/a_117302403.jpg);
+    	background-repeat: no-repeat;
+    	background-size: 100% ,100%;
+        font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        color:#000;
+        margin: 0;
+        padding: 0;
+        
+    }
+    #div1{
+    	background-color: lightskyblue;
+    }
+    #h22{
+    	font-family: "arial black";
+    	color: lavenderblush;
+    }
+ </style>
+ <!--轮播图-->
+		<script>
+			$(function() {
+			
+		
+				//监听滚动到某个点的事件
+			/*$('#navbar-example').on('activate.bs.scrollspy', function () {
+			  var currentItem = $("#navbar-example li.active a").text();			 
+			  document.title=currentItem;
+		    });
+				*/
+				
+				/*----------------------------轮播图--------------------------------------*/
+				//设置自动切换毫秒数
+				$('#myCarousel').carousel({
+					interval: 2000
+				});
+				// 初始化轮播
+				$(".start-slide").click(function() {
+					$("#myCarousel").carousel('cycle');
+				});
+				// 停止轮播
+				$(".pause-slide").click(function() {
+					$("#myCarousel").carousel('pause');
+				});
+				// 循环轮播到上一个项目
+				$(".prev-slide").click(function() {
+					$("#myCarousel").carousel('prev');
+				});
+				// 循环轮播到下一个项目
+				$(".next-slide").click(function() {
+					$("#myCarousel").carousel('next');
+				});
+				// 循环轮播到某个特定的帧 
+				$(".slide-one").click(function() {
+					$("#myCarousel").carousel(0);
+				});
+				$(".slide-two").click(function() {
+					$("#myCarousel").carousel(1);
+				});
+				$(".slide-three").click(function() {
+					$("#myCarousel").carousel(2);
+				});
+			});
+			
+			/*跳转*/
+			$(window).scroll(function(){
+				if($(this).scrollTop() >= 500){
+					$("#back").show()
+				}else{
+					$("#back").hide()
+				}
+			})
+			
+			
+			/*----------------------------轮播图--------------------------------------*/
+		</script>
+ <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css"/>
+ <link href="css/main.css" type="text/css" rel="Stylesheet"/> 
+<link href="bootstrap/css/bootstrap-theme.css" type="text/css" rel="Stylesheet"/> 
+</head>
+<body >	
+	<div class="container">
+		<div id="div1" class="jumbotron text-center header_bgimg"> 
+          <h2 id="h22">睿盈科技办公邮件接收系统</h2>
+     <a  class="btn btn-success btn-lg" href="http://www.kairuicaifu.com/Main/MainPage?ReturnUrl=%2F#/m" role="button" style="margin-top:20px">睿 盈 科 技 官 网</a> 
+ 	</div>
+ 	<!----------------------------轮播图-------------------------------------->
+				<div id="myCarousel" class="carousel slide">
+					<!-- 轮播（Carousel）指标 -->
+					<ol class="carousel-indicators">
+						<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+						<li data-target="#myCarousel" data-slide-to="1"></li>
+						<li data-target="#myCarousel" data-slide-to="2"></li>
+					</ol>
+					<!-- 轮播（Carousel）项目 -->
+					<div class="carousel-inner" style="height: 500px;">
+						<div class="item active" align="center" style="height: 500px;">
+							<img src="src/1064banner1.jpg" alt="First slide">
+						</div>
+						<div class="item" align="center" style="height: 500px;">
+							<img src="src/hb1.jpg" alt="Second slide">
+						</div>
+						<div class="item" align="center" style="height: 500px;">
+							<img src="src/banner3.jpg" alt="Third slide">
+						</div>
+					</div>
+					<!-- 轮播（Carousel）导航 -->
+					<a class="carousel-control left" href="#myCarousel" data-slide="prev" style="font-size: 50px; ">&lsaquo; </a>
+					<a class="carousel-control right" href="#myCarousel" data-slide="next" style="font-size: 50px;">&rsaquo;</a>
+					<!-- 控制按钮 -->
+					<div style="text-align:center;">
+						<!--<input type="button" class="btn start-slide" value="自动">
+          <input type="button" class="btn pause-slide" value="暂停">
+          <input type="button" class="btn prev-slide" value="上一页">
+          <input type="button" class="btn next-slide" value="下一页">-->
+						<!--<input type="button" class="btn slide-one" value="Slide 1">
+          <input type="button" class="btn slide-two" value="Slide 2">            
+          <input type="button" class="btn slide-three" value="Slide 3">-->
+					</div>
+				</div>
+				<!----------------------------轮播图-------------------------------------->
+ 		
+ 	
+	 <div class="form-group" style="margin: 0 auto; margin-top: 30px;">
+		<span class="btn btn-success" style=" width: 500px; margin-left: 320px;"">账&nbsp;&nbsp;号</span>
+		<input id="username" class="form-control " style="width: 500px; margin-top: 20px; margin-left: 320px;" placeholder="请输入您的账号">
+	</div>
+	<div class="form-group">
+		<span class="btn btn-success" style=" width: 500px; margin-top: 20px; margin-left: 320px;">密&nbsp;&nbsp;码</span>
+		<input id="password" type="password" class="form-control" style="width: 500px; margin-left: 320px; margin-top: 20px;"placeholder="请输入您的密码" >
+	</div>
+	<button id="login" class="btn btn-success"  style="width: 248px; margin-left: 320px;">登  录</button>
+	<button id="login" class="btn btn-success"  style="width: 248px;">注   册</button>
+	</div>
+	
+</body>
+<script type="text/javascript">
+	document.onkeydown=function(event){
+		var e = event;
+	
+        if (e.keyCode == 13) {
+           $.ajax({
+				type:"post",
+				url:"admin/register.action",
+				data:{"userID":$("#username").val(),
+				  "userPass":$("#password").val()
+				}
+			}).done(function(res){
+				if(res == true){
+					location.href = "main.html";
+					
+				}else{
+					alert("登录失败：账号或密码错误")
+				}
+				
+			})        
+        }
+    }
+
+
+//异步
+$("#username").blur(function(){
+		$.ajax({
+			type:"post",
+			url:"admin/selectByID.action",
+			data:{"userID":$("#username").val()}
+		}).done(function(res){
+			if(res.userID != null){
+				$("#username2").remove();
+				$("#username").after("<span id = 'username2' class='btn btn-success' style='margin-top: 20px; width: 500px; margin-left: 320px;'>账&nbsp;号&nbsp;存&nbsp;在&nbsp;可&nbsp;以&nbsp;登&nbsp;录</span>")
+			}else{
+				$("#username2").remove();
+				$("#username").after("<span id = 'username2'  class='btn btn-danger' style='margin-top: 20px; width: 500px; margin-left: 320px;'>账&nbsp;号&nbsp;不&nbsp;存&nbsp;在&nbsp;请&nbsp;先&nbsp;注&nbsp;册</span>")
+			}
+			
+		})
+})
+	//登录
+	$("#login").click(function(){
+			$.ajax({
+				type:"post",
+				url:"admin/register.action",
+				data:{"userID":$("#username").val(),
+				  "userPass":$("#password").val()
+				}
+			}).done(function(res){
+				if(res == true){
+					location.href = "main.html";
+					
+				}else{
+					alert("登录失败：账号或密码错误")
+				}
+				
+			})
+	})
+</script>
+</html>

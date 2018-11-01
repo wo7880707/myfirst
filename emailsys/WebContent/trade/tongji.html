@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>睿盈Email管理系统</title>
+		<meta charset="UTF-8" http-equiv="X-UA-Compatible" content="IE=edge" >
+		<link rel="stylesheet" href="../styles/common.css" />	
+		<script src="../js/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="../js/main.js" charset="utf-8"></script>
+		<script type="text/javascript" src="../js/alltrade.js" charset="utf-8"></script>
+		<style type="text/css">
+#divfrom {
+	float: left;
+	width: 150px;
+}
+#divto {
+	float: left;
+	width: 150px;
+}
+#divoperator {
+	float: left;
+	width: 50px;
+	padding: 60px 5px;
+}
+#divoperator input[type="button"] {
+	margin: 10px 0;
+}
+#selDepartments {
+	display: block;
+	width: 100%;
+}
+#selEmployees {
+	display: block;
+	width: 100%;
+	height: 225px;
+}
+#selSelectedEmployees {
+	display: block;
+	width: 100%;
+	height: 225px;
+}
+#numofattendents {
+	background-color: lavender;
+	text-align: center;
+}
+#meetingname {
+	text-align: center;
+}
+</style>
+	</head>
+	<body>
+		<div class="page-header">
+		</div>
+		<div class="page-body">
+			<div class="page-sidebar">
+			</div>
+			<div class="page-content">
+				<div class="content-nav">
+				</div>
+				<select  id = "se1234" >
+				<option value="0" >所有信息</option>
+				<option value="1" >精准查询</option>
+				<option value="2">日期查询</option>
+				<option value="3">同品种查询</option>
+				<option value="4" >同策略查询</option>
+				<option value="5" selected = "selected">统计查询</option>
+				</select>
+				<fieldset style="margin-top: 10px;">
+						<legend>统计查询</legend>	
+				<!-- 导航栏结束 -->
+				<span id="" style="margin-left: 70px;">总收益:</span><br><br>
+				<span id="" style="margin-left: 70px;">策略GH01总收益:</span><br><br>
+				<span id="" style="margin-left: 70px;">策略GH02总收益:</span><br><br>
+				<span id="" style="margin-left: 70px;">策略GL01总收益:</span><br><br>
+				<span id="" style="margin-left: 70px;">策略GL02总收益:</span><br><br>
+				<span id="" style="margin-left: 70px;">品种PP总收益:</span><br><br>
+				<span id="" style="margin-left: 70px;">品种P总收益:</span><br><br>
+				<span id="" style="margin-left: 70px;">品种RU总收益:</span><br><br>
+				<span id="" style="margin-left: 70px;">品种RB总收益:</span><br><br>
+				<span id="" style="margin-left: 70px;">品种I总收益:</span><br><br>
+				<span id="" style="margin-left: 70px;">品种J总收益:</span><br><br>
+				<span id="" style="margin-left: 70px;">品种JM总收益:</span><br><br>
+				<span id="" style="margin-left: 70px;">品种RM总收益:</span><br><br>
+				<span id="" style="margin-left: 70px;">品种CS总收益:</span><br><br>
+				<span id="" style="margin-left: 70px;">品种BU总收益:</span><br><br>
+				<span id="" style="margin-left: 70px;">品种AL总收益:</span><br><br>
+				<span id="" style="margin-left: 70px;">品种AU总收益:</span><br><br>
+				<span id="" style="margin-left: 70px;">品种AG总收益:</span><br><br>
+			</div>
+		</div>
+		<div class="page-footer">
+
+		</div>
+		<script type="text/javascript">
+			$(".page-header").load("header.html");
+			$(".page-sidebar").load("sidebar.html");
+			$(".page-footer").load("footer.html");
+		</script>
+		<script src="init.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+	<script>
+	var date = new Date();
+	//获取当前年
+	var year=date.getFullYear();
+	//获取当前月
+	var month=date.getMonth()+1;
+	//获取当前日
+	var day=date.getDate(); 
+	//默认结束时间
+	if(month < 10){
+		$("#enddate").prop("value",year + "-0" +  month + "-" + day);
+	}else{
+		$("#enddate").prop("value",year + "-" +  month + "-" + day);
+	}
+	//给se1234一个onchange事件
+	$("#se1234").change(function() {
+		var tem = $("#se1234").val();
+		if(parseInt(tem) == 0){
+			location.href = "trade.jsp";
+		}else if(parseInt(tem) == 1){
+			location.href = "mohuchaxun.html";
+		}else if (parseInt(tem) == 2){
+			location.href = "riqichaxun.html";
+		}else if (parseInt(tem) == 3){
+			location.href = "tongpinzhong.html";
+		}else if (parseInt(tem) == 4){
+			location.href = "tongceluo.html";
+		}else if (parseInt(tem) == 5){
+			location.href = "tongji.html";
+		}
+		
+		})
+		</script>
+
+			
+		
+</html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+
+		<title>Insert title here</title>
+		<style type="text/css">
+			html,
+			body {
+				position: relative;
+				height: 100%;
+			}
+			
+			body {
+				/*background-image: url(src/a_117302403.jpg);
+    	background-repeat: no-repeat;
+    	background-size: 100% ,100%;*/
+				background-color: #ff6700;
+				font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+				font-size: 14px;
+				margin: 0;
+				padding: 0;
+			}
+			
+			#div1 {
+				background-color: lightpink;
+			}
+			
+			#h22 {
+				font-family: "arial black";
+				color: lavenderblush;
+			}
+		</style>
+
+		<script type="text/javascript" src="bootstrap/js/jquery.js">
+		</script>
+		<!-- <script type="text/javascript" src="bootstrap/js/bootstrap.js"> -->
+		</script>
+		<script type="text/javascript" src="js/main.js"></script>
+		<script type="text/javascript" src="js/showall.js"></script>
+		<!-- <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css" /> -->
+		<link href="css/main.css" type="text/css" rel="Stylesheet" />
+		<link href="bootstrap/css/bootstrap-theme.css" type="text/css" rel="Stylesheet" />
+		<script type="text/javascript">
+			/*跳转*/
+			$(window).scroll(function() {
+				if ($(this).scrollTop() >= 500) {
+					$("#back").show()
+				} else {
+					$("#back").hide()
+				}
+			})
+		</script>
+	</head>
+
+	<body>
+		<!-- <table id="table2" border="1" cellpadding="0" cellspacing="0" class="table table-hover table-striped" align="center">
+		<thead>  
+            <tr><th>编号</th><th>发件人</th><th>时间</th><th>主题</th><th>正文内容</th><th>附件地址</th></tr>  
+        </thead>  
+        <tbody id="table1">
+        	
+        </tbody>
+		
+	</table> -->
+		<div class="container">
+
+			<div id="div1" class="jumbotron text-center header_bgimg">
+				<h2 id="h22">睿盈科技办公邮件接收系统</h2>
+				<a class="btn btn-success btn-lg" href="http://www.kairuicaifu.com/Main/MainPage?ReturnUrl=%2F#/m" role="button" style="margin-top:20px">睿 盈 科 技 官 网</a>
+				<div class="text-right text-info"><span id="info"></span> <span id="info2" class="btn btn-success">注 销</span></div>
+				<div class="text-right text-info"> <span id="count" class="btn btn-success"></span></div>
+			</div>
+			<div id="browser" class="tbtree" style=" border: 1px;">
+
+				<!-- <div id="mainTbtable" class='uqt_detail'> -->
+				<table id="UQT_detailTable" class="table table-striped table-bordered">
+				</table>
+				<!-- </div> -->
+				<div id="div_pager" class="page_con">
+				</div>
+			</div>
+			<div id="" style="margin-top:20px;   border:  solid coral 1px ; ">
+				<div id="" style="margin-top: 10px; ">
+
+					&nbsp; &nbsp; <span class="btn btn-warning" style="margin-left: 450px;width: 200px; height: 40px;">请&nbsp;填&nbsp;写&nbsp;查&nbsp;询&nbsp;内&nbsp;容</span>
+					<br /><br /> &nbsp; &nbsp; <span class="btn btn-success" style="margin-left: 220px;">发 &nbsp;件 &nbsp;人</span> &nbsp; &nbsp; <input type="text" name="s1" id="s1" value="" placeholder="请输入..." /> &nbsp; &nbsp; <span class="btn btn-success">时 &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;间</span>					&nbsp; &nbsp; <input type="text" name="s1" id="s2" value="" placeholder="请输入..." /> &nbsp; &nbsp; <span class="btn btn-success">主  &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;题</span> &nbsp; &nbsp; <input type="text" name="s1" id="s3" value="" placeholder="请输入..."
+					/>
+					<br /><br /> &nbsp; &nbsp; <span class="btn btn-success" style="margin-left: 220px;">正文内容</span> &nbsp; &nbsp; <input type="text" name="s1" id="s4" value="" placeholder="请输入..." /> &nbsp; &nbsp; <span class="btn btn-success">附件地址</span> &nbsp; &nbsp;
+					<input type="text" name="s1" id="s5" value="" placeholder="请输入..." />
+					<br /><br />
+					<button id="b" class="btn btn-info" style="margin-left: 470px; width: 200px; margin-bottom: 10px; height: 40px;">确&nbsp;&nbsp;认&nbsp;&nbsp;查&nbsp;&nbsp;询</button>
+				</div>
+			</div>
+			<br />
+			<br />
+			<div id="">
+				<span id="">预计开始时间:</span>
+				<input type="date" id="startdate" value="2017-01-01" style="height: 35px;"/> <input type="time" value="12:00:00" id="starttime" style="height: 35px;"/>
+				<span id="">预计结束时间:</span>
+				<input type="date" id="enddate"  value="2017-01-01" style="height: 35px;"/> <input type="time" value="12:00:00" id="endtime" style="height: 35px;"/>
+		<button id="deletemails"> 确定删除</button>
+			</div>
+			<div id="" style="margin-top:20px;   border:  solid coral 1px ; ">
+				<div id="" style="margin-top: 10px; ">
+					<div id="export" style="margin-bottom: 10px;">
+						&nbsp; &nbsp; <span class="btn btn-warning" style="margin-left: 455px; width: 200px; height: 40px;">请&nbsp;选&nbsp;择&nbsp;导&nbsp;出&nbsp;文&nbsp;件&nbsp;类&nbsp;型</span>
+						<br /><br />
+						<span class="btn btn-success" style="margin-left: 220px;"><a data-type="json" href="javascript:;" style="text-decoration:none;color: white;">导 出 json</a></span> &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+						<span class="btn btn-success"><a data-type="txt" href="javascript:;" style="text-decoration:none;color: white;">导 出 txt</a></span> &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+						<span class="btn btn-success"><a data-type="csv" href="javascript:;" style="text-decoration:none;color: white;">导 出 csv</a></span> &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+						<span class="btn btn-success"><a data-type="xls" href="javascript:;" style="text-decoration:none;color: white;">导 出 excel</a></span> &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+						<span class="btn btn-success"><a data-type="doc" href="javascript:;" style="text-decoration:none;color: white;">导 出 word</a></span>
+					</div>
+				</div>
+			</div>
+			<div style="margin-top: 20px" onclick="$(window).scrollTop(0)"><span class="btn btn-success" style="width: 200px; margin-left: 470px;">回到顶端</span></div>
+			<div class="text-center" id="footer"><span class="btn btn-danger" style="margin-top: 30px; width: 500px;">版权所有  &nbsp; 盗版必究</span></div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		//读取session登录账号
+		$.ajax({
+			type: "post",
+			url: "admin/ifSessionHas.action"
+		}).done(function(res) {
+			$('#info').text("当前用户： " + res.userID + "身份： 管理员")
+		})
+		//读取session登录账号和登录次数
+		$.ajax({
+				type: "post",
+				url: "count/queryById.action"
+			}).done(function(res) {
+				$('#count').text("尊贵的会员!您是第： " + res.count + "位登录者")
+			})
+			//取消session登录账号
+		$('#info2').click(function() {
+				$.ajax({
+					type: "post",
+					url: "admin/destroySession.action"
+				}).done(function(res) {
+					if (res == true) {
+						location.href = "Login.html";
+					} else {
+						alert("Session会话没有取消掉")
+					}
+				})
+			})
+			//读取
+		$.ajax({
+				type: "post",
+				url: "email/showAll.action"
+			}).done(function(res) {
+				json = res;
+				$(function() {
+						initProgrom();
+					})
+					/* for (var i = 0; i < res.length; i++) {
+						$('#table1').append('<tr><td>'+ res[i].id+'</td><td>'+res[i].emailName+'</td><td>'+res[i].emailTime +'</td><td>'+res[i].emailTheme +'</td><td>'+res[i].emailContent +'</td><td>'+res[i].emailFile +'</td></tr>')	
+					} */
+					/* private int id;
+					private String emailName;
+					private String emailTime;
+					private String emailTheme;
+					private String emailContent;
+					private String emailFile; */
+			})
+			//模糊查询
+		$("#b").click(function() {
+				//取到下拉菜单里所显示值的value
+				$.ajax({
+					type: "post",
+					url: "email/showAllByCondition.action",
+					data: {
+						"emailName": $("#s1").val(),
+						"emailTime": $("#s2").val(),
+						"emailTheme": $("#s3").val(),
+						"emailContent": $("#s4").val(),
+						"emailFile": $("#s5").val()
+					}
+				}).done(function(res) {
+					if (res.length == 0) {
+						alert("没有对应的信息")
+					} else {
+						$('#UQT_detailTable').empty();
+						json = res;
+						$(function() {
+								initProgrom();
+							})
+							/* for (var i = 0; i < res.length; i++) {	
+								$('#table1').append('<tr><td>'+ res[i].id+'</td><td>'+res[i].emailName+'</td><td>'+res[i].emailTime +'</td><td>'+res[i].emailTheme +'</td><td>'+res[i].emailContent +'</td><td>'+res[i].emailFile +'</td></tr>')	
+							} */
+					}
+				})
+			})
+			//删除数据
+			$("#deletemails").click(function(){
+				$.ajax({
+			type: "post",
+			url: "email/deleteClientMails.action",
+			data:{
+				"startdate": $("#startdate").val(),
+				"starttime": $("#starttime").val(),
+				"enddate": $("#enddate").val(),
+				"endtime": $("#endtime").val()}
+		}).done(function(res) {
+			/*if(res == 0){
+				alert("成功")
+			}else{
+				alert("失败")
+			}*/
+		})
+			})
+		
+	</script>
+	<!--导出到各种文件-->
+	<script src="js_out/Blob.js"></script>
+
+	<script src="js_out/FileSaver.js"></script>
+
+	<script src="js_out/tableExport.js"></script>
+
+	<script>
+		var $exportLink = document.getElementById('export');
+		$exportLink.addEventListener('click', function(e) {
+			e.preventDefault();
+			if (e.target.nodeName === "A") {
+				tableExport('UQT_detailTable', '测试测试', e.target.getAttribute('data-type'));
+			}
+		}, false);
+	</script>
+
+</html>

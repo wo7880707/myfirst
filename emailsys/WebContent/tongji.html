@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>睿盈Email管理系统</title>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="styles/common.css" />
+		<script src="js/jquery.js" type="text/javascript" charset="UTF-8"></script>
+		<style type="text/css">
+			.ts{
+				width: 300px;
+			}
+		</style>
+				<style type="text/css">
+#divfrom {
+	float: left;
+	width: 120px;
+}
+
+#divto {
+	float: left;
+	width: 120px;
+}
+
+#divoperator {
+	float: left;
+	width: 50px;
+	padding: 60px 5px;
+}
+
+#divoperator input[type="button"] {
+	margin: 10px 0;
+}
+
+#selDepartments {
+	display: block;
+	width: 100%;
+}
+
+#selEmployees {
+	display: block;
+	width: 100%;
+	height: 200px;
+}
+
+#selSelectedEmployees {
+	display: block;
+	width: 100%;
+	height: 225px;
+}
+#numofattendents {
+	background-color: lavender;
+	text-align: center;
+}
+#meetingname {
+
+	text-align: center;
+}
+
+</style>
+<style type="text/css">
+#divfrom1 {
+	float: left;
+	width: 150px;
+}
+
+#divto1 {
+	float: left;
+	width: 150px;
+}
+
+#divoperator1 {
+	float: left;
+	width: 50px;
+	padding: 60px 5px;
+}
+
+#divoperator1 input[type="button"] {
+	margin: 10px 0;
+}
+
+#selDepartments1 {
+	display: block;
+	width: 100%;
+}
+
+#selEmployees1 {
+	display: block;
+	width: 100%;
+	height: 225px;
+}
+
+#selSelectedEmployees1 {
+	display: block;
+	width: 100%;
+	height: 225px;
+}
+#numofattendents1 {
+	background-color: lavender;
+	text-align: center;
+}
+#meetingname1 {
+
+	text-align: center;
+}
+</style>
+<style type="text/css">
+#divfrom2 {
+	float: left;
+	width: 120px;
+}
+
+#divto2 {
+	float: left;
+	width: 120px;
+}
+
+#divoperator2 {
+	float: left;
+	width: 50px;
+	padding: 60px 5px;
+}
+
+#divoperator2 input[type="button"] {
+	margin: 10px 0;
+}
+
+#selDepartments2 {
+	display: block;
+	width: 100%;
+}
+
+#selEmployees2 {
+	display: block;
+	width: 100%;
+	height: 200px;
+}
+
+#selSelectedEmployees2 {
+	display: block;
+	width: 100%;
+	height: 225px;
+}
+#numofattendents2 {
+	background-color: lavender;
+	text-align: center;
+}
+#meetingname2 {
+	text-align: center;
+}
+</style>
+	</head>
+
+	<body>
+		<div class="page-header">
+
+		</div>
+		<div class="page-body">
+			<div class="page-sidebar">
+
+			</div>
+			<div class="page-content">
+				<div class="content-nav">
+				</div>
+					<fieldset>
+						<legend style="margin-left:370px;">统计查询</legend>
+						<h1>本次查询的公共信息</h1>
+						<span id="" style="margin-left:160px;">开始时间:</span>
+						<input type="date" id="startdate"  style="width:135px;"/> 
+						<span id="">结束时间:</span>
+						<input type="date" id="enddate"   style="width:135px;"/> 
+						<!--同账号-->
+						<table style="margin-left:155px;">
+						<tr>
+						<td  valign = "top" >账号名：</td>
+						<td>
+						<div id="divfrom1">
+								<!-- <select id="selDepartments1" onchange="showEmployees1()">
+								</select> -->
+								 <select id="selEmployees1" multiple="true">
+								</select>
+							</div>
+							<div id="divoperator1">
+								<input type="button" class="clickbutton" value="&gt;" onclick="selectEmployees1()" /> 
+								<input type="button" class="clickbutton"
+									value="&lt;" onclick="deSelectEmployees1()" />
+							</div>
+							<div id="divto1">
+								<select id="selSelectedEmployees1" multiple="true">
+								</select>
+								</td>
+								</tr>
+								</table>	
+				<table>
+				<tr>
+				<td>
+				<!--同策略-->
+				
+					<fieldset style="margin-top:30px;margin-left:10spx; ">
+						<legend>类型一：同策略查询</legend>
+						<table>
+						<tr>
+						<td  valign = "top" >策略名：</td>
+						<td>
+						<div id="divfrom">
+								<select id="selDepartments" >
+								</select>
+								 <select id="selEmployees" multiple="true">
+								</select>
+							</div>
+							<div id="divoperator">
+								<input type="button" class="clickbutton" value="&gt;" onclick="selectEmployees()" /> 
+								<input type="button" class="clickbutton"
+									value="&lt;" onclick="deSelectEmployees()" />
+							</div>
+							<div id="divto">
+								<select id="selSelectedEmployees" multiple="true">
+								</select>
+								</td>
+								</tr>
+								</table>
+							<br /><br />
+							<button id = "tongji_byclName" style = "width : 200px; margin-left :150px;" >统 计</button>
+					</fieldset>
+				
+				</td>
+				<!--同品种-->
+				<td>
+				
+					<fieldset style="margin-top:30px; ">
+						<legend>类型二：同合约查询</legend>
+						<table>
+						<tr>
+						<td  valign = "top" >合约名：</td>
+						<td>
+						<div id="divfrom2">
+								<select id="selDepartments2" >
+								</select>
+								 <select id="selEmployees2" multiple="true">
+								</select>
+							</div>
+							<div id="divoperator2">
+								<input type="button" class="clickbutton" value="&gt;" onclick="selectEmployees2()" /> 
+								<input type="button" class="clickbutton"
+									value="&lt;" onclick="deSelectEmployees2()" />
+							</div>
+							<div id="divto2">
+								<select id="selSelectedEmployees2" multiple="true">
+								</select>
+								</td>
+								</tr>
+								</table>
+							<br /><br />
+							<button id = "tongji_bycontract" style = "width : 200px; margin-left :150px;" >统 计</button>
+					</fieldset>
+				
+				</td>
+				</tr>
+				</table>
+				</fieldset>
+			</div>
+		</div>
+		<div class="page-footer">
+		</div>
+		<script type="text/javascript">
+			$(".page-header").load("header.html");
+			$(".page-sidebar").load("sidebar.html");
+			$(".page-footer").load("footer.html");
+		</script>
+		<script src="js/init.js" type="text/javascript" charset="UTF-8"></script>
+		<script type="text/javascript">
+		//-----------------传数据用的-------------------------------
+		var arr = [];
+		var arr1 = [];
+		var arr2 = [];
+		//-----------------进入页面读取信息-------------------------------
+		//写入日期
+					/*var url = location.href.split("?")[1];
+					var startdate = url.split("+")[0];
+					var enddate = url.split("+")[1];
+					$("#startdate").prop("value",startdate+"");			
+					$("#enddate").prop("value",enddate+"");
+				 	//读取账号
+					$.ajax({
+						type: "post",
+						url: "trade/showTradeCountByTime.action",
+						data: {"startTime":$("#startdate").val(),
+							   "endTime":$("#enddate").val()
+							}
+					}).done(function(res) {
+						arr1 = res;
+						$('#selEmployees1').empty();
+						for (var i = 0; i < res.length; i++) {
+						$('#selEmployees1').append('<option value = "' + res[i] + '"> '+ res[i] + '</option>');
+
+						} 
+					})
+				//读取策略
+				$.ajax({
+					type: "post",
+					url: "trade/showClNameByTime.action",
+					data: {"startTime":$("#startdate").val(),
+						   "endTime":$("#enddate").val()
+						}
+				}).done(function(res) {
+					
+					$('#selDepartments').empty();
+					for (var i = 0; i < res.length; i++) {
+					$('#selDepartments').append('<option value = "' + res[i] + '"> '+ res[i] + '</option>');
+					} 
+					//读取策略下的品种
+					$.ajax({
+						type: "post",
+						url: "trade/showContractByTime.action",
+						data: {"startTime":$("#startdate").val(),
+							   "endTime":$("#enddate").val(),
+							   "clName":$("#selDepartments").val()
+							}
+					}).done(function(res) {
+						arr = res;
+						$('#selEmployees').empty();
+						for (var i = 0; i < res.length; i++) {
+						$('#selEmployees').append('<option value = "' + res[i] + '"> '+ res[i] + '</option>');
+
+						} 
+					})
+				})
+				//读取合约
+				$.ajax({
+					type: "post",
+					url: "trade/showContractByTime_2.action",
+					data: {"startTime":$("#startdate").val(),
+						   "endTime":$("#enddate").val()
+						}
+				}).done(function(res) {
+					$('#selDepartments2').empty();
+					for (var i = 0; i < res.length; i++) {
+					$('#selDepartments2').append('<option value = "' + res[i] + '"> '+ res[i] + '</option>');
+					} 
+					//读取合约下的策略
+					$.ajax({
+						type: "post",
+						url: "trade/showClNameByTime_2.action",
+						data: {"startTime":$("#startdate").val(),
+							   "endTime":$("#enddate").val(),
+							   "contract":$("#selDepartments2").val()
+							}
+					}).done(function(res) {
+						arr2 = res;
+						$('#selEmployees2').empty();
+						for (var i = 0; i < res.length; i++) {
+						$('#selEmployees2').append('<option value = "' + res[i] + '"> '+ res[i] + '</option>');
+
+						} 
+					})
+				}) */
+		//先查询上次数据库中有没有查询的数据
+		//1.有  就还原
+		//2.没有就读上个页面的日期
+		$.ajax({
+				type: "post",
+				url: "query_info/query.action"
+			}).done(function(res_all) {
+				if(res_all.type == 1){
+					//日期
+					$("#startdate").prop("value",res_all.startTime);			
+					$("#enddate").prop("value",res_all.endTime);
+					//读取账号
+					$.ajax({
+						type: "post",
+						url: "trade/showTradeCountByTime.action",
+						data: {"startTime":$("#startdate").val(),
+							   "endTime":$("#enddate").val()
+							}
+					}).done(function(res) {
+						arr1 = res;
+						$('#selEmployees1').empty();
+						for (var i = 0; i < res.length; i++) {
+						$('#selEmployees1').append('<option value = "' + res[i] + '"> '+ res[i] + '</option>');
+
+						} 
+					})
+				//读取策略
+				$.ajax({
+					type: "post",
+					url: "trade/showClNameByTime.action",
+					data: {"startTime":$("#startdate").val(),
+						   "endTime":$("#enddate").val()
+						}
+				}).done(function(res) {
+					
+					$('#selDepartments').empty();
+					for (var i = 0; i < res.length; i++) {
+					$('#selDepartments').append('<option value = "' + res[i] + '"> '+ res[i] + '</option>');
+					} 
+					
+				})
+				//读取合约
+				$.ajax({
+					type: "post",
+					url: "trade/showContractByTime_2.action",
+					data: {"startTime":$("#startdate").val(),
+						   "endTime":$("#enddate").val()
+						}
+				}).done(function(res) {
+					$('#selDepartments2').empty();
+					for (var i = 0; i < res.length; i++) {
+					$('#selDepartments2').append('<option value = "' + res[i] + '"> '+ res[i] + '</option>');
+					} 
+					//读取合约下的策略
+					$.ajax({
+						type: "post",
+						url: "trade/showClNameByTime_2.action",
+						data: {"startTime":$("#startdate").val(),
+							   "endTime":$("#enddate").val(),
+							   "contract":$("#selDepartments2").val()
+							}
+					}).done(function(res) {
+						arr2 = res;
+						$('#selEmployees2').empty();
+						for (var i = 0; i < res.length; i++) {
+						$('#selEmployees2').append('<option value = "' + res[i] + '"> '+ res[i] + '</option>');
+						//选中查到的策略
+						/* $('#selDepartments'). */
+						$('#selDepartments option[value="' +res_all.clNames + "").prop("selected","selected");
+						//读取策略下的品种
+						$.ajax({
+							type: "post",
+							url: "trade/showContractByTime.action",
+							data: {"startTime":$("#startdate").val(),
+								   "endTime":$("#enddate").val(),
+								   "clName":$("#selDepartments").val()
+								}
+						}).done(function(res) {
+							arr = res;
+							$('#selEmployees').empty();
+							for (var i = 0; i < res.length; i++) {
+							$('#selEmployees').append('<option value = "' + res[i] + '"> '+ res[i] + '</option>');
+
+							} 
+						})
+						} 
+					})
+				})
+					
+					//填写之前信息
+					if(res_all.tradeCounts != null){
+						var tradeCounts_old =  [];
+						tradeCounts_old = res_all.tradeCounts.split("-");
+						var selSelectedEmployees1_temp = document.getElementById('selSelectedEmployees1');
+						for (var i = 0; i < tradeCounts_old.length; i++) {
+							var opt = document.createElement("option");
+							opt.value = tradeCounts_old[i];
+							opt.text = tradeCounts_old[i]
+							selSelectedEmployees1_temp.appendChild(opt);
+						}
+						
+					}
+					if(res_all.contracts != null){
+						var contracts_old = []; 
+						contracts_old = res_all.contracts.split("-");
+						var selSelectedEmployees_temp = document.getElementById('selSelectedEmployees');
+						for (var i = 0; i < contracts_old.length; i++) {
+							var opt = document.createElement("option");
+							opt.value = contracts_old[i];
+							opt.text = contracts_old[i]
+							selSelectedEmployees_temp.appendChild(opt);
+						}
+					}
+					
+					/* var contracts_old_1 = contracts_old.spilt("-"); */
+
+				}else if(res_all.type == 2){
+					//日期
+					$("#startdate").prop("value",res_all.startTime);			
+					$("#enddate").prop("value",res_all.endTime);
+					//读取账号
+					$.ajax({
+						type: "post",
+						url: "trade/showTradeCountByTime.action",
+						data: {"startTime":$("#startdate").val(),
+							   "endTime":$("#enddate").val()
+							}
+					}).done(function(res) {
+						arr1 = res;
+						$('#selEmployees1').empty();
+						for (var i = 0; i < res.length; i++) {
+						$('#selEmployees1').append('<option value = "' + res[i] + '"> '+ res[i] + '</option>');
+
+						} 
+					})
+				//读取策略
+				$.ajax({
+					type: "post",
+					url: "trade/showClNameByTime.action",
+					data: {"startTime":$("#startdate").val(),
+						   "endTime":$("#enddate").val()
+						}
+				}).done(function(res) {
+					
+					$('#selDepartments').empty();
+					for (var i = 0; i < res.length; i++) {
+					$('#selDepartments').append('<option value = "' + res[i] + '"> '+ res[i] + '</option>');
+					} 
+					//读取策略下的品种
+					$.ajax({
+						type: "post",
+						url: "trade/showContractByTime.action",
+						data: {"startTime":$("#startdate").val(),
+							   "endTime":$("#enddate").val(),
+							   "clName":$("#selDepartments").val()
+							}
+					}).done(function(res) {
+						arr = res;
+						$('#selEmployees').empty();
+						for (var i = 0; i < res.length; i++) {
+						$('#selEmployees').append('<option value = "' + res[i] + '"> '+ res[i] + '</option>');
+
+						} 
+					})
+				})
+				//读取合约
+				$.ajax({
+					type: "post",
+					url: "trade/showContractByTime_2.action",
+					data: {"startTime":$("#startdate").val(),
+						   "endTime":$("#enddate").val()
+						}
+				}).done(function(res) {
+					$('#selDepartments2').empty();
+					for (var i = 0; i < res.length; i++) {
+					$('#selDepartments2').append('<option value = "' + res[i] + '"> '+ res[i] + '</option>');
+					} 
+					//选中查到的合约
+					/* $('#selDepartments'). */
+					$('#selDepartments2 option[value="' +res_all.contracts + "").prop("selected","selected");
+					//读取合约下的策略
+					$.ajax({
+						type: "post",
+						url: "trade/showClNameByTime_2.action",
+						data: {"startTime":$("#startdate").val(),
+							   "endTime":$("#enddate").val(),
+							   "contract":$("#selDepartments2").val()
+							}
+					}).done(function(res) {
+						arr2 = res;
+						$('#selEmployees2').empty();
+						for (var i = 0; i < res.length; i++) {
+						$('#selEmployees2').append('<option value = "' + res[i] + '"> '+ res[i] + '</option>');
+
+						} 
+					})
+				})
+					
+					
+				
+					//填写之前信息
+					if(res_all.tradeCounts != null){
+						var tradeCounts_old =  [];
+						tradeCounts_old = res_all.tradeCounts.split("-");
+						var selSelectedEmployees1_temp = document.getElementById('selSelectedEmployees1');
+						for (var i = 0; i < tradeCounts_old.length; i++) {
+							var opt = document.createElement("option");
+							opt.value = tradeCounts_old[i];
+							opt.text = tradeCounts_old[i]
+							selSelectedEmployees1_temp.appendChild(opt);
+						}
+						
+					}
+					if(res_all.clNames != null){
+						var clNames_old = []; 
+						clNames_old = res_all.clNames.split("-");
+						var selSelectedEmployees2_temp = document.getElementById('selSelectedEmployees2');
+						for (var i = 0; i < clNames_old.length; i++) {
+							var opt = document.createElement("option");
+							opt.value = clNames_old[i];
+							opt.text = clNames_old[i]
+							selSelectedEmployees2_temp.appendChild(opt);
+						}
+					}
+				}
+
+			})
+			
+			
+			//-----------------所有的onchangge使事件-------------------------------
+			//开始时间onchangge
+			$('#startdate').change(function(){
+				$('#selSelectedEmployees').empty();
+				$('#selSelectedEmployees2').empty();
+				//读取账号
+				$.ajax({
+					type: "post",
+					url: "trade/showTradeCountByTime.action",
+					data: {"startTime":$("#startdate").val(),
+						   "endTime":$("#enddate").val()
+						}
+				}).done(function(res) {
+					arr1 = res;
+					$('#selEmployees1').empty();
+					$('#selSelectedEmployees1').empty();
+					for (var i = 0; i < res.length; i++) {
+					$('#selEmployees1').append('<option value = "' + res[i] + '"> '+ res[i] + '</option>');
+
+					} 
+				})
+			//读取策略
+			$.ajax({
+				type: "post",
+				url: "trade/showClNameByTime.action",
+				data: {"startTime":$("#startdate").val(),
+					   "endTime":$("#enddate").val()
+					}
+			}).done(function(res) {
+				$('#selDepartments').empty();
+				for (var i = 0; i < res.length; i++) {
+				$('#selDepartments').append('<option value = "' + res[i] + '"> '+ res[i] + '</option>');
+				} 
+				//读取策略下的品种
+				$.ajax({
+					type: "post",
+					url: "trade/showContractByTime.action",
+					data: {"startTime":$("#startdate").val(),
+						   "endTime":$("#enddate").val(),
+						   "clName":$("#selDepartments").val()
+						}
+				}).done(function(res) {
+					arr = res;
+					$('#selEmployees').empty();
+					for (var i = 0; i < res.length; i++) {
+					$('#selEmployees').append('<option value = "' + res[i] + '"> '+ res[i] + '</option>');
+
+					} 
+				})
+			})
+			//读取合约
+			$.ajax({
+				type: "post",
+				url: "trade/showContractByTime_2.action",
+				data: {"startTime":$("#startdate").val(),
+					   "endTime":$("#enddate").val()
+					}
+			}).done(function(res) {
+				$('#selDepartments2').empty();
+				for (var i = 0; i < res.length; i++) {
+				$('#selDepartments2').append('<option value = "' + res[i] + '"> '+ res[i] + '</option>');
+				} 
+				//读取合约下的策略
+				$.ajax({
+					type: "post",
+					url: "trade/showClNameByTime_2.action",
+					data: {"startTime":$("#startdate").val(),
+						   "endTime":$("#enddate").val(),
+						   "contract":$("#selDepartments2").val()
+						}
+				}).done(function(res) {
+					arr2 = res;
+					$('#selEmployees2').empty();
+					for (var i = 0; i < res.length; i++) {
+					$('#selEmployees2').append('<option value = "' + res[i] + '"> '+ res[i] + '</option>');
+
+					} 
+				})
+			})
+				
+			})
+			//结束时间onchangge
+			$('#enddate').change(function(){
+				$('#selSelectedEmployees').empty();
+				$('#selSelectedEmployees2').empty();
+				//读取账号
+				$.ajax({
+					type: "post",
+					url: "trade/showTradeCountByTime.action",
+					data: {"startTime":$("#startdate").val(),
+						   "endTime":$("#enddate").val()
+						}
+				}).done(function(res) {
+					arr1 = res;
+					$('#selEmployees1').empty();
+					$('#selSelectedEmployees1').empty();
+					for (var i = 0; i < res.length; i++) {
+					$('#selEmployees1').append('<option value = "' + res[i] + '"> '+ res[i] + '</option>');
+
+					} 
+				})
+			//读取策略
+			$.ajax({
+				type: "post",
+				url: "trade/showClNameByTime.action",
+				data: {"startTime":$("#startdate").val(),
+					   "endTime":$("#enddate").val()
+					}
+			}).done(function(res) {
+				$('#selDepartments').empty();
+				for (var i = 0; i < res.length; i++) {
+				$('#selDepartments').append('<option value = "' + res[i] + '"> '+ res[i] + '</option>');
+				} 
+				//读取策略下的品种
+				$.ajax({
+					type: "post",
+					url: "trade/showContractByTime.action",
+					data: {"startTime":$("#startdate").val(),
+						   "endTime":$("#enddate").val(),
+						   "clName":$("#selDepartments").val()
+						}
+				}).done(function(res) {
+					arr = res;
+					$('#selEmployees').empty();
+					for (var i = 0; i < res.length; i++) {
+					$('#selEmployees').append('<option value = "' + res[i] + '"> '+ res[i] + '</option>');
+
+					} 
+				})
+			})
+			//读取合约
+			$.ajax({
+				type: "post",
+				url: "trade/showContractByTime_2.action",
+				data: {"startTime":$("#startdate").val(),
+					   "endTime":$("#enddate").val()
+					}
+			}).done(function(res) {
+				$('#selDepartments2').empty();
+				for (var i = 0; i < res.length; i++) {
+				$('#selDepartments2').append('<option value = "' + res[i] + '"> '+ res[i] + '</option>');
+				} 
+				//读取合约下的策略
+				$.ajax({
+					type: "post",
+					url: "trade/showClNameByTime_2.action",
+					data: {"startTime":$("#startdate").val(),
+						   "endTime":$("#enddate").val(),
+						   "contract":$("#selDepartments2").val()
+						}
+				}).done(function(res) {
+					arr2 = res;
+					$('#selEmployees2').empty();
+					for (var i = 0; i < res.length; i++) {
+					$('#selEmployees2').append('<option value = "' + res[i] + '"> '+ res[i] + '</option>');
+
+					} 
+				})
+			})
+				
+			})
+			//策略onchange
+			$('#selDepartments').change(function() {
+				$.ajax({
+					type: "post",
+					url: "trade/showContractByTime.action",
+					data: {"startTime":$("#startdate").val(),
+						   "endTime":$("#enddate").val(),
+						   "clName":$("#selDepartments").val()
+						}
+				}).done(function(res) {
+					arr = res;
+					$('#selSelectedEmployees').empty();
+					$('#selEmployees').empty();
+					for (var i = 0; i < res.length; i++) {
+					$('#selEmployees').append('<option value = "' + res[i] + '"> '+ res[i] + '</option>');
+
+					} 
+				})
+				
+			})
+			//合约onchange
+			$('#selDepartments2').change(function() {
+				$.ajax({
+					type: "post",
+					url: "trade/showClNameByTime_2.action",
+					data: {"startTime":$("#startdate").val(),
+						   "endTime":$("#enddate").val(),
+						   "contract":$("#selDepartments2").val()
+						}
+				}).done(function(res) {
+					arr2 = res;
+					$('#selSelectedEmployees2').empty();
+					$('#selEmployees2').empty();
+					for (var i = 0; i < res.length; i++) {
+					$('#selEmployees2').append('<option value = "' + res[i] + '"> '+ res[i] + '</option>');
+
+					} 
+				})
+				
+			})
+		//类型一  移动
+		
+		//var result = [{"name":"jack"},{"name":"rose"}];
+		var result = [];
+		var clName = "";
+		var tempInt;
+		//左右移动的
+			function employee(employeeid, employeename) {
+				this.employeeid = employeeid;
+				this.employeename = employeename;
+			}
+
+			function department(departmentid, departmentname, employees) {
+				this.departmentid = departmentid;
+				this.departmentname = departmentname;
+				this.employees = employees;
+			} 
+			//右移>
+			function selectEmployees() {
+				var selEmployees = document.getElementById('selEmployees');
+				for (var i = 0; i < selEmployees.options.length; i++) {
+					/*遍历所有的select，如果被选中就走if*/
+					if (selEmployees.options[i].selected) {
+						/*给临时变量赋值i*/
+						tempInt=i;
+						/*增加到右侧*/
+						addEmployee(selEmployees.options[i]);
+						/*变成不选中项*/
+						selEmployees.options[i].selected = false;
+					}
+				}	
+			}
+			//右移动的
+			function addEmployee(optEmployee) {
+				var selSelectedEmployees = document.getElementById('selSelectedEmployees');
+				var options = selSelectedEmployees.options;
+				var i = 0;
+				/*循环遍历一下右侧的原有值，和现在传过来的值比较，有一样的就跳出方法*/
+				while (i < options.length) {
+					//名字相等跳出循环，不添加
+					if (optEmployee.value == options[i].value) {
+						/*return跳出整个方法*/
+						return;
+					} 
+					i++;
+				}
+				/*没有一样的，创建一个option并且赋值*/
+				var opt = document.createElement("option");
+				opt.value = optEmployee.value;
+				opt.text = optEmployee.text;
+				selSelectedEmployees.appendChild(opt);
+				/*向数组里放数据*/
+				result.push(arr[tempInt]);
+				/*遍历数组result*/
+				clName = "";
+				for (var k = 0; k < result.length; k++) {
+						clName = clName + "-" + result[k];
+					}
+				$("#clm").val("");
+				$("#clm").val(clName);
+			}	
+			//左移动的
+			function deSelectEmployees() {
+				/*var elementsToRemoved = new Array();
+				var options = selSelectedEmployees.options;
+				for (var i = options.length-1; i >= 0; i--) {
+					if (options[i].selected) {
+						for(var j = result.length-1;j>=0;j--){
+							if(options[i].value == result[j]){
+								result.splice(j,1);
+								clName = "";
+						for (var k = 0; k < result.length; k++) {
+						clName = clName + "." + result[k];
+					}
+						$("#clm").val("");
+						$("#clm").val(clName);
+					selSelectedEmployees.removeChild(options[i]);
+					}
+				}
+						} 
+						} 
+					}*/
+				var selSelectedEmployees = document.getElementById('selSelectedEmployees');
+				var elementsToRemoved = new Array();
+				var options = selSelectedEmployees.options;
+				for (var i = 0; i < options.length; i++) {
+					if (options[i].selected) {
+						elementsToRemoved.push(options[i]);
+					}
+				}
+				for (i = 0; i < elementsToRemoved.length; i++) {
+					selSelectedEmployees.removeChild(elementsToRemoved[i]);
+					
+					for(var j =0;j<result.length;j++){
+						if(elementsToRemoved[i].value == (result[j] + "")){
+							result.splice(j,1);
+						}
+					}
+				}
+				clName = "";
+				for (var k = 0; k < result.length; k++) {
+					clName = clName + "-" + result[k];
+				}
+				$("#clm").val("");
+				$("#clm").val(clName);
+}			
+		//日期  移动
+
+		//var result = [{"name":"jack"},{"name":"rose"}];
+		var result1 = [];
+		var clName1 = "";
+		var tempInt1;
+		//左右移动的
+		/* function employee(employeeid, employeename) {
+			this.employeeid = employeeid;
+			this.employeename = employeename;
+		}
+
+		function department(departmentid, departmentname, employees) {
+			this.departmentid = departmentid;
+			this.departmentname = departmentname;
+			this.employees = employees;
+		}  */
+		//右移>
+		function selectEmployees1() {
+			var selEmployees1 = document.getElementById('selEmployees1');
+			for (var i = 0; i < selEmployees1.options.length; i++) {
+				/*遍历所有的select，如果被选中就走if*/
+				if (selEmployees1.options[i].selected) {
+					/*给临时变量赋值i*/
+					tempInt1=i;
+					/*增加到右侧*/
+					addEmployee1(selEmployees1.options[i]);
+					/*变成不选中项*/
+					selEmployees1.options[i].selected = false;
+				}
+			}	
+		}
+		//右移动的
+		function addEmployee1(optEmployee1) {
+			var selSelectedEmployees1 = document.getElementById('selSelectedEmployees1');
+			var options = selSelectedEmployees1.options;
+			var i = 0;
+			/*循环遍历一下右侧的原有值，和现在传过来的值比较，有一样的就跳出方法*/
+			while (i < options.length) {
+				//名字相等跳出循环，不添加
+				if (optEmployee1.value == options[i].value) {
+					/*return跳出整个方法*/
+					return;
+				} 
+				i++;
+			}
+			/*没有一样的，创建一个option并且赋值*/
+			var opt = document.createElement("option");
+			opt.value = optEmployee1.value;
+			opt.text = optEmployee1.text;
+			selSelectedEmployees1.appendChild(opt);
+			/*向数组里放数据*/
+			result1.push(arr1[tempInt1]);
+			/*遍历数组result*/
+			clName1 = "";
+			for (var k = 0; k < result1.length; k++) {
+					clName1 = clName1 + "-" + result1[k];
+				}
+			$("#clm").val("");
+			$("#clm").val(clName1);
+		}	
+		//左移动的
+		function deSelectEmployees1() {
+			var selSelectedEmployees1 = document.getElementById('selSelectedEmployees1');
+			var elementsToRemoved = new Array();
+			var options = selSelectedEmployees1.options;
+			for (var i = 0; i < options.length; i++) {
+				if (options[i].selected) {
+					elementsToRemoved.push(options[i]);
+				}
+			}
+			for (i = 0; i < elementsToRemoved.length; i++) {
+				selSelectedEmployees1.removeChild(elementsToRemoved[i]);
+				
+				for(var j =0;j<result1.length;j++){
+					if(elementsToRemoved[i].value == (result1[j] + "")){
+						result1.splice(j,1);
+					}
+				}
+			}
+			clName1 = "";
+			for (var k = 0; k < result1.length; k++) {
+				clName1 = clName1 + "-" + result1[k];
+			}
+			$("#clm").val("");
+			$("#clm").val(clName1);
+			}
+		//类型二  移动
+
+		//var result = [{"name":"jack"},{"name":"rose"}];
+		var result2 = [];
+		var clName2 = "";
+		var tempInt2;
+		//左右移动的
+		/* function employee(employeeid, employeename) {
+			this.employeeid = employeeid;
+			this.employeename = employeename;
+		}
+
+		function department(departmentid, departmentname, employees) {
+			this.departmentid = departmentid;
+			this.departmentname = departmentname;
+			this.employees = employees;
+		}  */
+		//右移>
+		function selectEmployees2() {
+			var selEmployees2 = document.getElementById('selEmployees2');
+			for (var i = 0; i < selEmployees2.options.length; i++) {
+				/*遍历所有的select，如果被选中就走if*/
+				if (selEmployees2.options[i].selected) {
+					/*给临时变量赋值i*/
+					tempInt2=i;
+					/*增加到右侧*/
+					addEmployee2(selEmployees2.options[i]);
+					/*变成不选中项*/
+					selEmployees2.options[i].selected = false;
+				}
+			}	
+		}
+		//右移动的
+		function addEmployee2(optEmployee2) {
+			var selSelectedEmployees2 = document.getElementById('selSelectedEmployees2');
+			var options = selSelectedEmployees2.options;
+			var i = 0;
+			/*循环遍历一下右侧的原有值，和现在传过来的值比较，有一样的就跳出方法*/
+			while (i < options.length) {
+				//名字相等跳出循环，不添加
+				if (optEmployee2.value == options[i].value) {
+					/*return跳出整个方法*/
+					return;
+				} 
+				i++;
+			}
+			/*没有一样的，创建一个option并且赋值*/
+			var opt = document.createElement("option");
+			opt.value = optEmployee2.value;
+			opt.text = optEmployee2.text;
+			selSelectedEmployees2.appendChild(opt);
+			/*向数组里放数据*/
+			result2.push(arr2[tempInt2]);
+			/*遍历数组result*/
+			clName2 = "";
+			for (var k = 0; k < result2.length; k++) {
+					clName2 = clName2 + "-" + result2[k];
+				}
+			$("#clm").val("");
+			$("#clm").val(clName2);
+		}	
+		//左移动的
+		function deSelectEmployees2() {
+			var selSelectedEmployees2 = document.getElementById('selSelectedEmployees2');
+			var elementsToRemoved = new Array();
+			var options = selSelectedEmployees2.options;
+			for (var i = 0; i < options.length; i++) {
+				if (options[i].selected) {
+					elementsToRemoved.push(options[i]);
+				}
+			}
+			for (i = 0; i < elementsToRemoved.length; i++) {
+				selSelectedEmployees2.removeChild(elementsToRemoved[i]);
+				
+				for(var j =0;j<result2.length;j++){
+					if(elementsToRemoved[i].value == (result2[j] + "")){
+						result2.splice(j,1);
+					}
+				}
+			}
+			clName2 = "";
+			for (var k = 0; k < result2.length; k++) {
+				clName2 = clName2 + "-" + result2[k];
+			}
+			$("#clm").val("");
+			$("#clm").val(clName2);
+			}
+		//统计同策略查询
+		 $("#tongji_byclName").click(function(){
+			//1.如果账号名 和策略名为空就alert “为空”  2.如果都不为空 就查询
+			if(document.getElementById('selSelectedEmployees1').options.length == 0){
+				
+				alert("请选择账号名")
+				
+			} else if(document.getElementById('selSelectedEmployees').options.length == 0){
+				
+				alert("请选择策略名")
+				
+			}else{
+				//得到3个参数 1.账号名  2.合约名 3.时间4.策略名
+				//1.账号名
+				var tradeCount_object = document.getElementById('selSelectedEmployees1');
+				var tradeCount_object_array = tradeCount_object.options;
+				var tradeCount_tem = "";
+				for (var i = 0; i < tradeCount_object_array.length; i++) {
+					tradeCount_tem = tradeCount_tem + "-" + tradeCount_object_array[i].value;
+				}
+				var tradeCount = tradeCount_tem.replace(/-/,"");
+				//2.合约名
+				var contract_object = document.getElementById('selSelectedEmployees');
+				var contract_object_array = contract_object.options;
+				var contract_tem = "";
+				for (var i = 0; i < contract_object_array.length; i++) {
+					contract_tem = contract_tem + "-" + contract_object_array[i].value;
+				}
+				var contract = contract_tem.replace(/-/,"");
+				//3.时间   
+				//开始时间
+				var startTime = $("#startdate").val();
+				//结束时间
+		  		var endTime = $("#enddate").val();
+		  		//4.策略名
+		  		var clName= $("#selDepartments").val();
+				
+				 location.href = "trade/highcharts_byclName.action?clName="+clName+"&tradeCount="+tradeCount+"&contract="+contract+"&startTime="+startTime+"&endTime="+endTime;  
+			
+			}
+		}) 
+		//统计同合约查询
+		$("#tongji_bycontract").click(function(){
+			//1.如果账号名 和策略名为空就alert “为空”  2.如果都不为空 就查询
+			 if(document.getElementById('selSelectedEmployees1').options.length == 0){
+				alert("请选择账号名")
+			} else if(document.getElementById('selSelectedEmployees2').options.length == 0){
+				alert("请选择合约名")
+			}else {
+				//得到3个参数 1.账号名  2.策略名3.时间4.合约名 
+				//1.账号名
+				var tradeCount_object = document.getElementById('selSelectedEmployees1');
+				var tradeCount_object_array = tradeCount_object.options;
+				var tradeCount_tem = "";
+				for (var i = 0; i < tradeCount_object_array.length; i++) {
+					tradeCount_tem = tradeCount_tem + "-" + tradeCount_object_array[i].value;
+				} 
+				var tradeCount = tradeCount_tem.replace(/-/,"");
+				//2.策略名
+				var clName_object = document.getElementById('selSelectedEmployees2');
+				var clName_object_array = clName_object.options;
+				var clName_tem = "";
+				for (var i = 0; i < clName_object_array.length; i++) {
+					clName_tem = clName_tem + "-" + clName_object_array[i].value;
+				} 
+				var clName = clName_tem.replace(/-/,"");
+				//3.时间   
+				//开始时间
+				var startTime = $("#startdate").val();
+				//结束时间
+		  		var endTime = $("#enddate").val();
+				//4.合约名
+				var contract = $("#selDepartments2").val();
+				location.href = "trade/highcharts_bycontract.action?contract="+contract+"&clName="+clName+"&tradeCount="+tradeCount+"&startTime="+startTime+"&endTime="+endTime;  
+			} 
+		})
+		</script>
+	</body>
+
+</html>

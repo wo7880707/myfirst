@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"./mybatis-3-config.dtd">
+<configuration>
+<typeAliases>
+	<!-- <typeAlias type="com.icss.hr.pojo.Dept" alias="Dept"/> -->
+</typeAliases>
+<!-- 配置mapper映射: 注意 这个是文件的路径 不是class类路径 -->
+<mappers>
+<mapper resource="com/ry/szq/mapper/AdminMapper.xml"/> 
+<mapper resource="com/ry/szq/mapper/EmailMapper.xml"/>  
+<mapper resource="com/ry/szq/mapper/EmailDateMapper.xml"/>  
+<!-- <mapper resource="com/ry/szq/mapper/CountMapper.xml"/>   -->
+<mapper resource="com/ry/szq/mapper/TradeMapper.xml"/> 
+<mapper resource="com/ry/szq/mapper/Query_infoMapper.xml"/> 
+
+</mappers>
+</configuration>
